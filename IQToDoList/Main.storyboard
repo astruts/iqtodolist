@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="1304" y="75"/>
         </scene>
-        <!--Table View Controller - My To-Do List-->
+        <!--To Do List Table View Controller - My To-Do List-->
         <scene sceneID="MQw-o3-x1U">
             <objects>
-                <tableViewController id="bS8-Ci-gJ1" sceneMemberID="viewController">
+                <tableViewController id="bS8-Ci-gJ1" customClass="IQToDoListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="osO-rz-kfY">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,6 +341,9 @@
     <classes>
         <class className="IQAddToDoItemViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IQAddToDoItemViewController.h"/>
+        </class>
+        <class className="IQToDoListTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQToDoListTableViewController.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
