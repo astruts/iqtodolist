@@ -8,6 +8,7 @@
 
 #import "IQToDoListTableViewController.h"
 #import "IQToDoItem.h"
+#import "IQAddToDoItemViewController.h"
 
 @interface IQToDoListTableViewController ()
 
@@ -31,7 +32,12 @@
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
-    
+    IQAddToDoItemViewController *source = [segue sourceViewController];
+    IQToDoItem *item = source.toDoItem;
+    if (item != nil) {
+        [self.toDoItems addObject:item];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidLoad {
