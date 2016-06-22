@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--View Controller - Add To-Do Item-->
         <scene sceneID="qCW-74-F2L">
             <objects>
                 <viewController id="nLb-xf-RCk" sceneMemberID="viewController">
@@ -24,12 +24,15 @@
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uNf-FB-3Ye"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vBN-D4-laL"/>
+                    <navigationItem key="navigationItem" title="Add To-Do Item" id="vBN-D4-laL">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="AC6-I3-6rI"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="kN9-rr-sRm"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjD-ss-PfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="874" y="75"/>
+            <point key="canvasLocation" x="1304" y="75"/>
         </scene>
         <!--Table View Controller - My To-Do List-->
         <scene sceneID="MQw-o3-x1U">
@@ -285,7 +288,7 @@
                     <navigationItem key="navigationItem" title="My To-Do List" id="SpQ-3y-a7U">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Qn6-v6-oCu">
                             <connections>
-                                <segue destination="nLb-xf-RCk" kind="push" id="EE1-LG-1dc"/>
+                                <segue destination="Apa-9x-uNT" kind="push" id="EE1-LG-1dc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -313,6 +316,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNX-gz-V9h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="37" y="75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1x7-i3-wzb">
+            <objects>
+                <navigationController id="Apa-9x-uNT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="g2G-lr-Yt2"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ld4-8H-GZY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nLb-xf-RCk" kind="relationship" relationship="rootViewController" id="UqK-VE-82u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vZd-uG-2Nk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="874" y="75"/>
         </scene>
     </scenes>
     <classes>
