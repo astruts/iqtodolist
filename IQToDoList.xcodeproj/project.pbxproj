@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E11D1ABCAB0003D515 /* IQToDoItem.m */; };
 		84E718B51D1AB25A00394933 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B41D1AB25A00394933 /* UIKit.framework */; };
 		84E718B71D1AB25A00394933 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B61D1AB25A00394933 /* Foundation.framework */; };
 		84E718B91D1AB25A00394933 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B81D1AB25A00394933 /* CoreGraphics.framework */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65E730E01D1ABCAB0003D515 /* IQToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoItem.h; sourceTree = "<group>"; };
+		65E730E11D1ABCAB0003D515 /* IQToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoItem.m; sourceTree = "<group>"; };
 		84E718B11D1AB25A00394933 /* IQToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IQToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E718B41D1AB25A00394933 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		84E718B61D1AB25A00394933 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -89,6 +92,8 @@
 				84E718C51D1AB25A00394933 /* IQAppDelegate.h */,
 				84E718C61D1AB25A00394933 /* IQAppDelegate.m */,
 				84E718D61D1AB33400394933 /* Main.storyboard */,
+				65E730E01D1ABCAB0003D515 /* IQToDoItem.h */,
+				65E730E11D1ABCAB0003D515 /* IQToDoItem.m */,
 				84E718CE1D1AB25A00394933 /* IQToDoList.xcdatamodeld */,
 				84E718BD1D1AB25A00394933 /* Supporting Files */,
 			);
@@ -178,6 +183,7 @@
 			files = (
 				84E718C31D1AB25A00394933 /* main.m in Sources */,
 				84E718C71D1AB25A00394933 /* IQAppDelegate.m in Sources */,
+				65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */,
 				84E718D01D1AB25A00394933 /* IQToDoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +299,7 @@
 				84E718D51D1AB25A00394933 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

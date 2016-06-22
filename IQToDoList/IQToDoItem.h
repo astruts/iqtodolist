@@ -10,4 +10,8 @@
 
 @interface IQToDoItem : NSObject
 
+@property NSString *itemName;
+@property BOOL completed;
+@property (readonly) NSDate *creationDate;
+
 @end
