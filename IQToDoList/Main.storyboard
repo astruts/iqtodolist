@@ -288,7 +288,7 @@
                     <navigationItem key="navigationItem" title="My To-Do List" id="SpQ-3y-a7U">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Qn6-v6-oCu">
                             <connections>
-                                <segue destination="Apa-9x-uNT" kind="push" id="EE1-LG-1dc"/>
+                                <segue destination="Apa-9x-uNT" kind="modal" id="EE1-LG-1dc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
