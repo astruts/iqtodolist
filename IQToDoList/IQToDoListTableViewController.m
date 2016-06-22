@@ -7,12 +7,27 @@
 //
 
 #import "IQToDoListTableViewController.h"
+#import "IQToDoItem.h"
 
 @interface IQToDoListTableViewController ()
+
+@property NSMutableArray *toDoItems;
 
 @end
 
 @implementation IQToDoListTableViewController
+
+- (void)loadInitialData {
+    IQToDoItem *item1 = [[IQToDoItem alloc] init];
+    item1.itemName = @"Buy milk";
+    [self.toDoItems addObject:item1];
+    IQToDoItem *item2 = [[IQToDoItem alloc] init];
+    item2.itemName = @"Buy eggs";
+    [self.toDoItems addObject:item2];
+    IQToDoItem *item3 = [[IQToDoItem alloc] init];
+    item3.itemName = @"Read a book";
+    [self.toDoItems addObject:item3];
+}
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
@@ -20,13 +35,11 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.toDoItems = [[NSMutableArray alloc] init];
+    [self loadInitialData];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,23 +51,29 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.toDoItems count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
-    
-    return cell;
-}
-*/
+    static NSString *CellIdentifier = @"ListPrototypeCell";
+    UITableViewCell *cell = [tableView
+                             dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
+    cell.textLabel.text = toDoItem.itemName;
+    if (toDoItem.completed) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    return cell;}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -99,5 +118,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    IQToDoItem *tappedItem = [self.toDoItems objectAtIndex:indexPath.row];
+    tappedItem.completed = !tappedItem.completed;
+    [tableView reloadRowsAtIndexPaths:@[indexPath]
+                     withRowAnimation:UITableViewRowAnimationNone];
+}
 
 @end
