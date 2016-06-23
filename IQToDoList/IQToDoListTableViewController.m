@@ -45,7 +45,7 @@
     [super viewDidLoad];
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
-    //self.editButtonItem.title = @"Delete";
+    self.editButtonItem.title = @"Delete";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
@@ -58,6 +58,11 @@
 {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
+    if (editing) {
+        self.navigationItem.leftBarButtonItem.title = @"Done";
+    } else {
+        self.navigationItem.leftBarButtonItem.title = @"Delete";
+    }
 }
 
 #pragma mark - Table view data source
