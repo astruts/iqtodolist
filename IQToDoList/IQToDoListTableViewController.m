@@ -45,8 +45,8 @@
     [super viewDidLoad];
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
+    //self.editButtonItem.title = @"Delete";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    self.navigationItem.rightBarButtonItem.title = @"Delete";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,12 +78,14 @@
                              dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
-    if (toDoItem.completed) {
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    /*if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    return cell;}
+    }*/
+    return cell;
+}
 
 
 
