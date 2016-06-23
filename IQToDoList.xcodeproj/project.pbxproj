@@ -10,6 +10,7 @@
 		65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E11D1ABCAB0003D515 /* IQToDoItem.m */; };
 		65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */; };
 		65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */; };
+		65EBC9F21D1BD845005821E3 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EBC9F11D1BD845005821E3 /* Images-2.xcassets */; };
 		84E718B51D1AB25A00394933 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B41D1AB25A00394933 /* UIKit.framework */; };
 		84E718B71D1AB25A00394933 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B61D1AB25A00394933 /* Foundation.framework */; };
 		84E718B91D1AB25A00394933 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B81D1AB25A00394933 /* CoreGraphics.framework */; };
@@ -31,6 +32,7 @@
 		65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAddToDoItemViewController.m; sourceTree = "<group>"; };
 		65E730E61D1AC8E80003D515 /* IQToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoListTableViewController.h; sourceTree = "<group>"; };
 		65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoListTableViewController.m; sourceTree = "<group>"; };
+		65EBC9F11D1BD845005821E3 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		84E718B11D1AB25A00394933 /* IQToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IQToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E718B41D1AB25A00394933 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		84E718B61D1AB25A00394933 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -105,6 +107,7 @@
 				65E730E01D1ABCAB0003D515 /* IQToDoItem.h */,
 				65E730E11D1ABCAB0003D515 /* IQToDoItem.m */,
 				84E718CE1D1AB25A00394933 /* IQToDoList.xcdatamodeld */,
+				65EBC9F11D1BD845005821E3 /* Images-2.xcassets */,
 				84E718BD1D1AB25A00394933 /* Supporting Files */,
 			);
 			path = IQToDoList;
@@ -181,6 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65EBC9F21D1BD845005821E3 /* Images-2.xcassets in Resources */,
 				84E718C11D1AB25A00394933 /* InfoPlist.strings in Resources */,
 				84E718C91D1AB25A00394933 /* Default.png in Resources */,
 				84E718CB1D1AB25A00394933 /* Default@2x.png in Resources */,
@@ -278,6 +282,8 @@
 		84E718D41D1AB25A00394933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
@@ -290,6 +296,8 @@
 		84E718D51D1AB25A00394933 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
