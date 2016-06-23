@@ -153,6 +153,11 @@
 				CLASSPREFIX = IQ;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Admin;
+				TargetAttributes = {
+					84E718B01D1AB25A00394933 = {
+						DevelopmentTeam = D4DBL8B73M;
+					};
+				};
 			};
 			buildConfigurationList = 84E718AC1D1AB25A00394933 /* Build configuration list for PBXProject "IQToDoList" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -273,6 +278,7 @@
 		84E718D41D1AB25A00394933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
 				INFOPLIST_FILE = "IQToDoList/IQToDoList-Info.plist";
@@ -284,6 +290,7 @@
 		84E718D51D1AB25A00394933 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
 				INFOPLIST_FILE = "IQToDoList/IQToDoList-Info.plist";
