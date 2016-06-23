@@ -45,7 +45,6 @@
     [super viewDidLoad];
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
-    self.editButtonItem.title = @"Delete";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
@@ -58,17 +57,12 @@
 {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
-    if (editing) {
-        self.navigationItem.leftBarButtonItem.title = @"Done";
-    } else {
-        self.navigationItem.leftBarButtonItem.title = @"Delete";
-    }
 }
 
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+/*-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"ViewControllerIdentifer" sender:self];
-}
+}*/
 
 #pragma mark - Table view data source
 
@@ -93,7 +87,8 @@
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    //cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    //cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     return cell;
 }
 
