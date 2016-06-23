@@ -128,15 +128,24 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"addItem"]) {
+        
+    }
+    if ([segue.identifier isEqualToString:@"editItem"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        IQAddToDoItemViewController *destViewController = segue.destinationViewController;
+        IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
+        destViewController.rowForEditing = toDoItem.itemName;
+    }
 }
-*/
+
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

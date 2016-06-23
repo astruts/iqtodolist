@@ -4,36 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Edit To-Do Item-->
-        <scene sceneID="Tbc-F3-l1x">
-            <objects>
-                <viewController id="I8E-pD-0id" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OK9-jU-yat">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zo4-Tb-XMl">
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="zo4-Tb-XMl" firstAttribute="top" secondItem="OK9-jU-yat" secondAttribute="top" constant="90" id="9nH-ie-qUl"/>
-                            <constraint firstAttribute="trailing" secondItem="zo4-Tb-XMl" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="PpB-w6-l7x"/>
-                            <constraint firstItem="zo4-Tb-XMl" firstAttribute="leading" secondItem="OK9-jU-yat" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="dos-Lk-z5y"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Edit To-Do Item" id="pRY-rM-zHA">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NIH-O7-hAT"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="szm-yB-wbN"/>
-                    </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K9I-aq-pA3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1452" y="-197"/>
-        </scene>
         <!--Add To Do Item View Controller - Add To-Do Item-->
         <scene sceneID="qCW-74-F2L">
             <objects>
@@ -75,7 +45,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjD-ss-PfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HMv-th-6sW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1452" y="377"/>
+            <point key="canvasLocation" x="1377" y="75"/>
         </scene>
         <!--To Do List Table View Controller - My To-Do List-->
         <scene sceneID="MQw-o3-x1U">
@@ -95,7 +65,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="jgk-Q4-5Td" kind="modal" trigger="accessoryAction" id="8dC-M0-CWN"/>
+                                    <segue destination="nLb-xf-RCk" kind="modal" identifier="editItem" trigger="accessoryAction" id="0Zq-Xp-QRm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -108,7 +78,7 @@
                     <navigationItem key="navigationItem" title="My To-Do List" id="SpQ-3y-a7U">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Qn6-v6-oCu">
                             <connections>
-                                <segue destination="Apa-9x-uNT" kind="modal" id="EE1-LG-1dc"/>
+                                <segue destination="Apa-9x-uNT" kind="modal" identifier="addItem" id="EE1-LG-1dc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -155,52 +125,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vZd-uG-2Nk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002" y="377"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="X91-P7-ukU">
-            <objects>
-                <navigationController id="jgk-Q4-5Td" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8PC-rU-J3I">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="I8E-pD-0id" kind="relationship" relationship="rootViewController" id="cUs-8g-bQT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pWc-nN-cxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1002" y="-197"/>
+            <point key="canvasLocation" x="901" y="430"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="IQAddToDoItemViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQAddToDoItemViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="IQToDoListTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQToDoListTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="unwindToList:" candidateClass="UIStoryboardSegue"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="UqK-VE-82u"/>
+    </inferredMetricsTieBreakers>
 </document>

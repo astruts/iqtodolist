@@ -16,6 +16,8 @@
 
 @implementation IQAddToDoItemViewController
 
+@synthesize rowForEditing;
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if (sender != self.doneButton) return;
@@ -29,6 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (rowForEditing == nil) return;
+    if (rowForEditing.length) {
+        _textField.text = rowForEditing;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
