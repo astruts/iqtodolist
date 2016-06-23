@@ -65,6 +65,11 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"ViewControllerIdentifer" sender:self];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -83,12 +88,12 @@
                              dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
-    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    /*if (toDoItem.completed) {
+    if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
-    }*/
+    }
+    //cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     return cell;
 }
 
