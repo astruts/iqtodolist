@@ -133,6 +133,14 @@
 
 #pragma mark - Navigation
 
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"editItem"] && self.tableView.editing) {
+        return YES;
+    }
+    return NO;
+}
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
@@ -140,7 +148,7 @@
     if ([segue.identifier isEqualToString:@"addItem"]) {
         
     }
-    if ([segue.identifier isEqualToString:@"editItem"]) {
+    if ([segue.identifier isEqualToString:@"editItem"] && self.tableView.editing) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         IQAddToDoItemViewController *destViewController = segue.destinationViewController;
         IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
@@ -150,16 +158,17 @@
 
 
 #pragma mark - Table view delegate
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (tableView.editing) {
-        NSLog(@"Editing");
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (!tableView.editing) {
+        IQToDoItem *tappedItem = [self.toDoItems objectAtIndex:indexPath.row];
+        tappedItem.completed = !tappedItem.completed;
+        [tableView reloadRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationNone];
     }
-    IQToDoItem *tappedItem = [self.toDoItems objectAtIndex:indexPath.row];
-    tappedItem.completed = !tappedItem.completed;
-    [tableView reloadRowsAtIndexPaths:@[indexPath]
-                     withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
