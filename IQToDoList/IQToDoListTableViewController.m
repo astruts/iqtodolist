@@ -53,19 +53,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-- (void) setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    [super setEditing:editing animated:animated];
-    [self.tableView setEditing:editing animated:animated];
-}
-*/
-
-/*-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-    [self performSegueWithIdentifier:@"ViewControllerIdentifer" sender:self];
-}*/
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -115,7 +102,6 @@
 }
     
 
-
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
@@ -135,10 +121,10 @@
 
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:@"editItem"] && self.tableView.editing) {
-        return YES;
+    if ([identifier isEqualToString:@"editItem"] && !self.tableView.editing) {
+        return NO;
     }
-    return NO;
+    return YES;
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -150,9 +136,10 @@
     }
     if ([segue.identifier isEqualToString:@"editItem"] && self.tableView.editing) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        IQAddToDoItemViewController *destViewController = segue.destinationViewController;
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        IQAddToDoItemViewController *controller = (IQAddToDoItemViewController *)navController.topViewController;
         IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
-        destViewController.rowForEditing = toDoItem.itemName;
+        controller.rowForEditing = toDoItem.itemName;
     }
 }
 
