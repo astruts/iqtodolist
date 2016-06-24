@@ -18,6 +18,9 @@
 
 @implementation IQToDoListTableViewController
 
+static NSString *const titleOfEditMode = @"Add To-Do Item";
+static NSString *const titleOfAddMode = @"Edit To-Do Item";
+
 - (void)loadInitialData {
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
@@ -34,20 +37,18 @@
 {
     IQAddToDoItemViewController *source = [segue sourceViewController];
     IQToDoItem *item = source.toDoItem;
-    NSString *titleOfViewController = @"Add To-Do Item";
-    if (source.title == titleOfViewController) {
-        if (item != nil) {
-            [self.toDoItems addObject:item];
-            [self.tableView reloadData];
-        }
+    
+    if (item == nil) {
+        return;
     }
-    titleOfViewController = @"Edit To-Do Item";
-    if (source.title == titleOfViewController) {
-        if (item != nil) {
-            [self.toDoItems replaceObjectAtIndex:source.indexItemInArray withObject:item];
-            [self.tableView reloadData];
-        }
+    
+    if (source.isEditMode) {
+        [self.toDoItems replaceObjectAtIndex:source.indexItemInArray withObject:item];;
+    } else {
+        [self.toDoItems addObject:item];
     }
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -77,8 +78,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"ListPrototypeCell";
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                            forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
     if (toDoItem.completed) {
@@ -86,12 +87,8 @@
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    //cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    //cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     return cell;
 }
-
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,36 +96,17 @@
     return YES;
 }
 
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //remove from NSMutableArray
         [_toDoItems removeObjectAtIndex:indexPath.row];
-        
         //remove from table view
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
-    
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark - Navigation
-
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"editItem"] && !self.tableView.editing) {
@@ -142,27 +120,16 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"addItem"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
-        viewController.toDoItem = [[IQToDoItem alloc] init];
-        viewController.title = @"Add To-Do Item";
-        viewController.isEditMode = NO;
+        [self prepareViewControllerForSegue:segue withItem:[[IQToDoItem alloc] init] withTitle:titleOfEditMode withIndexOfItem:0 isEditMode:NO];
     }
     if ([segue.identifier isEqualToString:@"editItem"] && self.tableView.editing) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
         IQToDoItem *toDoItemForEditing = [self.toDoItems objectAtIndex:indexPath.row];
-        viewController.toDoItem = toDoItemForEditing;
-        viewController.title = @"Edit To-Do Item";
-        viewController.indexItemInArray = indexPath.row;
-        viewController.isEditMode = YES;
+        [self prepareViewControllerForSegue:segue withItem:toDoItemForEditing withTitle:titleOfAddMode withIndexOfItem:indexPath.row isEditMode:YES];
     }
 }
 
-
 #pragma mark - Table view delegate
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -173,6 +140,23 @@
         [tableView reloadRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationNone];
     }
+}
+
+#pragma mark - Private methods
+
+- (void)prepareViewControllerForSegue:(UIStoryboardSegue *)segue
+                             withItem:(IQToDoItem *)item
+                            withTitle:(NSString *)title
+                      withIndexOfItem:(NSInteger)numberOfItem
+                           isEditMode:(BOOL)editMode
+{
+    UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+    IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
+    
+    viewController.toDoItem = item;
+    viewController.title = title;
+    viewController.indexItemInArray = numberOfItem;
+    viewController.isEditMode = editMode;
 }
 
 @end

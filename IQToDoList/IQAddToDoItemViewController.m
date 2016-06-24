@@ -28,13 +28,9 @@
     }
     
     if (self.isEditMode) {
-        
         if (![self.textBeforeEdit isEqualToString: self.textField.text]) {
             [self fillToDoItemIfNotEmpty];
-        } else {
-            self.toDoItem = nil;
         }
-        
     } else {
         [self fillToDoItemIfNotEmpty];
     }
@@ -45,6 +41,8 @@
     if (self.textField.text.length > 0) {
         self.toDoItem.itemName = self.textField.text;
         self.toDoItem.completed = NO;
+    } else {
+        self.toDoItem = nil;
     }
 }
 
