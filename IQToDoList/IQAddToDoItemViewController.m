@@ -9,8 +9,10 @@
 #import "IQAddToDoItemViewController.h"
 
 @interface IQAddToDoItemViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) NSString *textBeforeEdit;
 
 @end
 
@@ -33,8 +35,10 @@
     if (self.title == titleOfViewController) {
         if (sender != self.doneButton) return;
         if (self.textField.text.length > 0) {
-            self.toDoItem.itemName = self.textField.text;
-            self.toDoItem.completed = NO;
+            if (![self.textBeforeEdit isEqualToString: self.textField.text]) {
+                self.toDoItem.itemName = self.textField.text;
+                self.toDoItem.completed = NO;
+            }
         }
         else {
             self.toDoItem = nil;
@@ -46,9 +50,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (toDoItem.itemName == nil) return;
-    if (toDoItem.itemName.length) {
-        _textField.text = toDoItem.itemName;
-    }
+    self.textField.text = toDoItem.itemName;
+    self.textBeforeEdit = toDoItem.itemName;
 }
 
 - (void)didReceiveMemoryWarning {

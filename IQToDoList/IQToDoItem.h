@@ -12,7 +12,6 @@
 
 @property NSString *itemName;
 @property BOOL completed;
-@property (readonly) NSDate *creationDate;
-@property NSInteger indexInTable;
+//@property (readonly) NSDate *creationDate;
 
 @end

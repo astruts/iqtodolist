@@ -22,17 +22,12 @@
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
     [self.toDoItems addObject:item1];
-    item1.indexInTable = [self.toDoItems indexOfObject:item1];
-    
     IQToDoItem *item2 = [[IQToDoItem alloc] init];
     item2.itemName = @"Buy eggs";
     [self.toDoItems addObject:item2];
-    item2.indexInTable = [self.toDoItems indexOfObject:item2];
-    
     IQToDoItem *item3 = [[IQToDoItem alloc] init];
     item3.itemName = @"Read a book";
     [self.toDoItems addObject:item3];
-    item3.indexInTable = [self.toDoItems indexOfObject:item3];
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
@@ -43,14 +38,13 @@
     if (source.title == titleOfViewController) {
         if (item != nil) {
             [self.toDoItems addObject:item];
-            item.indexInTable = [self.toDoItems indexOfObject:item];
             [self.tableView reloadData];
         }
     }
     titleOfViewController = @"Edit To-Do Item";
     if (source.title == titleOfViewController) {
         if (item != nil) {
-            [self.toDoItems replaceObjectAtIndex:item.indexInTable withObject:item];
+            [self.toDoItems replaceObjectAtIndex:source.indexItemInArray withObject:item];
             [self.tableView reloadData];
         }
     }
@@ -159,6 +153,7 @@
         IQToDoItem *toDoItemForEditing = [self.toDoItems objectAtIndex:indexPath.row];
         viewController.toDoItem = toDoItemForEditing;
         viewController.title = @"Edit To-Do Item";
+        viewController.indexItemInArray = indexPath.row;
     }
 }
 

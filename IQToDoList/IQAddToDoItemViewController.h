@@ -11,6 +11,7 @@
 
 @interface IQAddToDoItemViewController : UIViewController
 
-@property (nonatomic, strong) IQToDoItem *toDoItem;
+@property (strong, nonatomic) IQToDoItem *toDoItem;
+@property NSInteger indexItemInArray;
 
 @end
