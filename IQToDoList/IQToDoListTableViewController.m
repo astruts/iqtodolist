@@ -132,14 +132,17 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"addItem"]) {
-        
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
+        viewController.title = @"Add To-Do Item";
     }
     if ([segue.identifier isEqualToString:@"editItem"] && self.tableView.editing) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        IQAddToDoItemViewController *controller = (IQAddToDoItemViewController *)navController.topViewController;
+        IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
         IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
-        controller.rowForEditing = toDoItem.itemName;
+        viewController.itemNameForEditing = toDoItem.itemName;
+        viewController.title = @"Edit To-Do Item";
     }
 }
 

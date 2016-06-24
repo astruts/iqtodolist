@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Add To Do Item View Controller - Add To-Do Item-->
+        <!--Add To Do Item View Controller-->
         <scene sceneID="qCW-74-F2L">
             <objects>
                 <viewController id="nLb-xf-RCk" customClass="IQAddToDoItemViewController" sceneMemberID="viewController">
@@ -24,7 +24,7 @@
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uNf-FB-3Ye"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add To-Do Item" id="vBN-D4-laL">
+                    <navigationItem key="navigationItem" id="vBN-D4-laL">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AC6-I3-6rI">
                             <connections>
                                 <segue destination="HMv-th-6sW" kind="unwind" unwindAction="unwindToList:" id="PtS-yb-lMF"/>
@@ -134,6 +134,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Y3F-8V-trp"/>
+        <segue reference="EE1-LG-1dc"/>
     </inferredMetricsTieBreakers>
 </document>

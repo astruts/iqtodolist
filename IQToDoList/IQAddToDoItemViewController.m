@@ -16,7 +16,7 @@
 
 @implementation IQAddToDoItemViewController
 
-@synthesize rowForEditing;
+@synthesize itemNameForEditing;
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -31,9 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (rowForEditing == nil) return;
-    if (rowForEditing.length) {
-        _textField.text = rowForEditing;
+    if (itemNameForEditing == nil) return;
+    if (itemNameForEditing.length) {
+        _textField.text = itemNameForEditing;
     }
 }
 
