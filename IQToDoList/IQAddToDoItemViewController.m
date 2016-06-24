@@ -16,24 +16,38 @@
 
 @implementation IQAddToDoItemViewController
 
-@synthesize itemNameForEditing;
+@synthesize toDoItem;
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (sender != self.doneButton) return;
-    if (self.textField.text.length > 0) {
-        self.toDoItem = [[IQToDoItem alloc] init];
-        self.toDoItem.itemName = self.textField.text;
-        self.toDoItem.completed = NO;
+    NSString *titleOfViewController = @"Add To-Do Item";
+    if (self.title == titleOfViewController) {
+        if (sender != self.doneButton) return;
+        if (self.textField.text.length > 0) {
+            self.toDoItem = [[IQToDoItem alloc] init];
+            self.toDoItem.itemName = self.textField.text;
+            self.toDoItem.completed = NO;
+        }
+    }
+    titleOfViewController = @"Edit To-Do Item";
+    if (self.title == titleOfViewController) {
+        if (sender != self.doneButton) return;
+        if (self.textField.text.length > 0) {
+            self.toDoItem.itemName = self.textField.text;
+            self.toDoItem.completed = NO;
+        }
+        else {
+            self.toDoItem = nil;
+        }
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (itemNameForEditing == nil) return;
-    if (itemNameForEditing.length) {
-        _textField.text = itemNameForEditing;
+    if (toDoItem.itemName == nil) return;
+    if (toDoItem.itemName.length) {
+        _textField.text = toDoItem.itemName;
     }
 }
 

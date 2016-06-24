@@ -22,21 +22,37 @@
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
     [self.toDoItems addObject:item1];
+    item1.indexInTable = [self.toDoItems indexOfObject:item1];
+    
     IQToDoItem *item2 = [[IQToDoItem alloc] init];
     item2.itemName = @"Buy eggs";
     [self.toDoItems addObject:item2];
+    item2.indexInTable = [self.toDoItems indexOfObject:item2];
+    
     IQToDoItem *item3 = [[IQToDoItem alloc] init];
     item3.itemName = @"Read a book";
     [self.toDoItems addObject:item3];
+    item3.indexInTable = [self.toDoItems indexOfObject:item3];
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
 {
     IQAddToDoItemViewController *source = [segue sourceViewController];
     IQToDoItem *item = source.toDoItem;
-    if (item != nil) {
-        [self.toDoItems addObject:item];
-        [self.tableView reloadData];
+    NSString *titleOfViewController = @"Add To-Do Item";
+    if (source.title == titleOfViewController) {
+        if (item != nil) {
+            [self.toDoItems addObject:item];
+            item.indexInTable = [self.toDoItems indexOfObject:item];
+            [self.tableView reloadData];
+        }
+    }
+    titleOfViewController = @"Edit To-Do Item";
+    if (source.title == titleOfViewController) {
+        if (item != nil) {
+            [self.toDoItems replaceObjectAtIndex:item.indexInTable withObject:item];
+            [self.tableView reloadData];
+        }
     }
 }
 
@@ -140,8 +156,8 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
-        IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
-        viewController.itemNameForEditing = toDoItem.itemName;
+        IQToDoItem *toDoItemForEditing = [self.toDoItems objectAtIndex:indexPath.row];
+        viewController.toDoItem = toDoItemForEditing;
         viewController.title = @"Edit To-Do Item";
     }
 }

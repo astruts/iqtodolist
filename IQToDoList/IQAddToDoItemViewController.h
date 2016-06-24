@@ -11,7 +11,6 @@
 
 @interface IQAddToDoItemViewController : UIViewController
 
-@property IQToDoItem *toDoItem;
-@property (nonatomic, strong) NSString *itemNameForEditing;
+@property (nonatomic, strong) IQToDoItem *toDoItem;
 
 @end
