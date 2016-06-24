@@ -12,6 +12,7 @@
 
 @property NSString *itemName;
 @property BOOL completed;
-//@property (readonly) NSDate *creationDate;
-
+@property NSInteger priority;
+@property NSDate *date;
+ 
 @end

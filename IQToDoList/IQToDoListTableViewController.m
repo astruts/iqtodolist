@@ -20,16 +20,25 @@
 
 static NSString *const titleOfEditMode = @"Add To-Do Item";
 static NSString *const titleOfAddMode = @"Edit To-Do Item";
+static NSString *const lowPriority = @"Low priority ";
+static NSString *const middlePriority = @"Middle priority ";
+static NSString *const highPriority = @"High priority ";
 
 - (void)loadInitialData {
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
+    item1.priority = 0;
+    item1.date = [NSDate date];
     [self.toDoItems addObject:item1];
     IQToDoItem *item2 = [[IQToDoItem alloc] init];
     item2.itemName = @"Buy eggs";
+    item2.priority = 1;
+    item2.date = [NSDate date];
     [self.toDoItems addObject:item2];
     IQToDoItem *item3 = [[IQToDoItem alloc] init];
     item3.itemName = @"Read a book";
+    item3.priority = 2;
+    item3.date = [NSDate date];
     [self.toDoItems addObject:item3];
 }
 
@@ -82,6 +91,22 @@ static NSString *const titleOfAddMode = @"Edit To-Do Item";
                                                             forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
+    NSString * stringPriority;
+    switch (toDoItem.priority)
+    {
+        case 0:
+            stringPriority = lowPriority;
+            break;
+        case 1:
+            stringPriority = middlePriority;
+            break;
+        case 2:
+            stringPriority = highPriority;
+            break;
+        default:
+            break; 
+    }
+    cell.detailTextLabel.text = [stringPriority stringByAppendingString:toDoItem.date.description];
     if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {

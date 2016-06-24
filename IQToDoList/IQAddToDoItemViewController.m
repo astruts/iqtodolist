@@ -11,8 +11,13 @@
 @interface IQAddToDoItemViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
 @property (weak, nonatomic) NSString *textBeforeEdit;
+@property (assign) NSInteger priorityBeforeEdit;
+@property (weak, nonatomic) NSDate *dateBeforeEdit;
 
 @end
 
@@ -22,13 +27,17 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (sender != self.doneButton)
+    if (sender == self.cancelButton)
     {
+        self.toDoItem = nil;
         return;
     }
     
     if (self.isEditMode) {
-        if (![self.textBeforeEdit isEqualToString: self.textField.text]) {
+        if ((![self.textBeforeEdit isEqualToString: self.textField.text]) ||
+            (self.priorityBeforeEdit != self.segmentedControl.selectedSegmentIndex) ||
+            (![self.dateBeforeEdit isEqualToDate: self.datePicker.date]))
+        {
             [self fillToDoItemIfNotEmpty];
         }
     } else {
@@ -41,6 +50,8 @@
     if (self.textField.text.length > 0) {
         self.toDoItem.itemName = self.textField.text;
         self.toDoItem.completed = NO;
+        self.toDoItem.priority = self.segmentedControl.selectedSegmentIndex;
+        self.toDoItem.date = self.datePicker.date;
     } else {
         self.toDoItem = nil;
     }
@@ -49,9 +60,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (toDoItem.itemName == nil) return;
-    self.textField.text = toDoItem.itemName;
+    if ((toDoItem.itemName == nil) || (toDoItem.date == nil))
+    {
+        return;
+    }
     self.textBeforeEdit = toDoItem.itemName;
+    self.textField.text = toDoItem.itemName;
+    self.priorityBeforeEdit = toDoItem.priority;
+    self.segmentedControl.selectedSegmentIndex = toDoItem.priority;
+    self.dateBeforeEdit = toDoItem.date;
+    self.datePicker.date = toDoItem.date;
 }
 
 - (void)didReceiveMemoryWarning {
