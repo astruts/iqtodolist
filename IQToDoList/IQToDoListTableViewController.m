@@ -53,11 +53,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
     [self.tableView setEditing:editing animated:animated];
 }
+*/
 
 /*-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,7 +89,7 @@
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    //cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     //cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     return cell;
 }
@@ -151,6 +153,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (tableView.editing) {
+        NSLog(@"Editing");
+    }
     IQToDoItem *tappedItem = [self.toDoItems objectAtIndex:indexPath.row];
     tappedItem.completed = !tappedItem.completed;
     [tableView reloadRowsAtIndexPaths:@[indexPath]
