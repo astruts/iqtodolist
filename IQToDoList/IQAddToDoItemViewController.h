@@ -11,6 +11,7 @@
 
 @interface IQAddToDoItemViewController : UIViewController
 
+@property (assign) BOOL isEditMode;
 @property (strong, nonatomic) IQToDoItem *toDoItem;
 @property NSInteger indexItemInArray;
 

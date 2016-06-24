@@ -22,27 +22,29 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSString *titleOfViewController = @"Add To-Do Item";
-    if (self.title == titleOfViewController) {
-        if (sender != self.doneButton) return;
-        if (self.textField.text.length > 0) {
-            self.toDoItem = [[IQToDoItem alloc] init];
-            self.toDoItem.itemName = self.textField.text;
-            self.toDoItem.completed = NO;
-        }
+    if (sender != self.doneButton)
+    {
+        return;
     }
-    titleOfViewController = @"Edit To-Do Item";
-    if (self.title == titleOfViewController) {
-        if (sender != self.doneButton) return;
-        if (self.textField.text.length > 0) {
-            if (![self.textBeforeEdit isEqualToString: self.textField.text]) {
-                self.toDoItem.itemName = self.textField.text;
-                self.toDoItem.completed = NO;
-            }
-        }
-        else {
+    
+    if (self.isEditMode) {
+        
+        if (![self.textBeforeEdit isEqualToString: self.textField.text]) {
+            [self fillToDoItemIfNotEmpty];
+        } else {
             self.toDoItem = nil;
         }
+        
+    } else {
+        [self fillToDoItemIfNotEmpty];
+    }
+}
+
+- (void)fillToDoItemIfNotEmpty
+{
+    if (self.textField.text.length > 0) {
+        self.toDoItem.itemName = self.textField.text;
+        self.toDoItem.completed = NO;
     }
 }
 
@@ -58,15 +60,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

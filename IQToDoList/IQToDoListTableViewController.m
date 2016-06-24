@@ -144,7 +144,9 @@
     if ([segue.identifier isEqualToString:@"addItem"]) {
         UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
         IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
+        viewController.toDoItem = [[IQToDoItem alloc] init];
         viewController.title = @"Add To-Do Item";
+        viewController.isEditMode = NO;
     }
     if ([segue.identifier isEqualToString:@"editItem"] && self.tableView.editing) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
@@ -154,6 +156,7 @@
         viewController.toDoItem = toDoItemForEditing;
         viewController.title = @"Edit To-Do Item";
         viewController.indexItemInArray = indexPath.row;
+        viewController.isEditMode = YES;
     }
 }
 
