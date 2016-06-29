@@ -63,16 +63,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="GJ0-1V-GR6"/>
+                            <constraint firstAttribute="bottom" secondItem="ZjK-3a-4Li" secondAttribute="bottom" constant="134" type="user" id="7ar-Z0-iKf"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="6" type="user" id="GJ0-1V-GR6"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Goz-Sx-6BA"/>
                             <constraint firstAttribute="trailing" secondItem="IjJ-MI-Sdd" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="M6p-o4-N7p"/>
                             <constraint firstItem="Raa-HB-c3M" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="146" id="UwB-KE-5P4"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="centerY" secondItem="Raa-HB-c3M" secondAttribute="centerY" type="default" id="ZqJ-Ye-6dr"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="90" id="anY-om-l3z"/>
-                            <constraint firstAttribute="trailing" secondItem="ZjK-3a-4Li" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dFQ-E2-tnP"/>
+                            <constraint firstAttribute="trailing" secondItem="ZjK-3a-4Li" secondAttribute="trailing" constant="6" type="user" id="dFQ-E2-tnP"/>
                             <constraint firstAttribute="trailing" secondItem="Raa-HB-c3M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uGl-t2-mLU"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uNf-FB-3Ye"/>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="208" id="yZd-O3-oRo"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="208" type="user" id="yZd-O3-oRo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vBN-D4-laL">
