@@ -36,11 +36,12 @@
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-3a-4Li">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="216" id="hkW-vr-QMD"/>
+                                    <constraint firstAttribute="height" constant="120" type="user" id="hkW-vr-QMD"/>
                                 </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="488465760.21384901">
-                                    <!--2016-06-24 12:56:00 +0000-->
+                                <date key="date" timeIntervalSinceReferenceDate="488448300.21384901">
+                                    <!--2016-06-24 08:05:00 +0000-->
                                 </date>
+                                <locale key="locale" localeIdentifier="en_MT"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
                                     <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
@@ -66,13 +67,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="C11-FN-QSt"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Goz-Sx-6BA"/>
+                            <constraint firstAttribute="trailing" secondItem="ZjK-3a-4Li" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ihw-mS-Sz0"/>
                             <constraint firstAttribute="trailing" secondItem="IjJ-MI-Sdd" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="M6p-o4-N7p"/>
                             <constraint firstItem="Raa-HB-c3M" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="146" id="UwB-KE-5P4"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="centerY" secondItem="Raa-HB-c3M" secondAttribute="centerY" type="default" id="ZqJ-Ye-6dr"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="90" id="anY-om-l3z"/>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="centerX" secondItem="IjJ-MI-Sdd" secondAttribute="centerX" type="default" id="n4A-Il-rBs"/>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="230" id="p5F-Yg-2f0"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="202" id="mwa-pp-oe9"/>
                             <constraint firstAttribute="trailing" secondItem="Raa-HB-c3M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uGl-t2-mLU"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uNf-FB-3Ye"/>
                         </constraints>
