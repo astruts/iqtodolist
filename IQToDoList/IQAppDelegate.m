@@ -26,13 +26,9 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
     
     [self preloadKeyboard];
     
-//    // Handle launching from a notification
-    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (localNotification) {
-        // Set icon badge number to zero
-        [self application:application didReceiveLocalNotification:localNotification];
-        //application.applicationIconBadgeNumber = 0;
-    }
+    [self registerNotificationsIfNeeded];
+    
+    [self retreiveStoredNotifications:launchOptions application:application];
     
     return YES;
 }
@@ -64,6 +60,19 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notificationAlertTitle
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:notificationAlertCancelButtonTitle
+                                              otherButtonTitles:nil];
+        [alert show];
+        //application.applicationIconBadgeNumber--;
+    }
 }
 
 - (void)saveContext
@@ -172,25 +181,28 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
     [lagFreeField removeFromSuperview];
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+- (void)registerNotificationsIfNeeded
 {
-    UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notificationAlertTitle
-                                                        message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:notificationAlertCancelButtonTitle
-                                              otherButtonTitles:nil];
-        [alert show];
-        application.applicationIconBadgeNumber--;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        // Register the supported interaction types.
+        UIUserNotificationType types = UIUserNotificationTypeBadge |
+        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *mySettings =
+        [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     }
-//    // Set icon badge number to zero
-//    application.applicationIconBadgeNumber = 0;
-//    
-//    // Request to reload table view data
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-//
-//    // Set icon badge number to zero
-//    application.applicationIconBadgeNumber = 0;
+}
+
+- (void)retreiveStoredNotifications:(NSDictionary *)launchOptions application:(UIApplication *)application
+{
+    //  Handle launching from a notification
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
+        // Set icon badge number to zero
+        [self application:application didReceiveLocalNotification:localNotification];
+        //application.applicationIconBadgeNumber = 0;
+    }
 }
 
 @end
