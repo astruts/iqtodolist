@@ -51,7 +51,9 @@
         self.toDoItem.itemName = self.textField.text;
         self.toDoItem.completed = NO;
         self.toDoItem.priority = self.segmentedControl.selectedSegmentIndex;
-        self.toDoItem.date = self.datePicker.date;
+        NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+        self.toDoItem.date = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+        //self.toDoItem.date = self.datePicker.date;
         
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = self.toDoItem.date;
@@ -67,7 +69,6 @@
         
         // Dismiss the view controller
         [self dismissViewControllerAnimated:YES completion:nil];
-        
     } else {
         self.toDoItem = nil;
     }
@@ -76,7 +77,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     if ((toDoItem.itemName == nil) || (toDoItem.date == nil))
     {
         return;

@@ -46,22 +46,18 @@ static NSString *const highPriority = @"High priority ";
 {
     IQAddToDoItemViewController *source = [segue sourceViewController];
     IQToDoItem *item = source.toDoItem;
-    
     if (item == nil) {
         return;
     }
-    
     if (source.isEditMode) {
         [self.toDoItems replaceObjectAtIndex:source.indexItemInArray withObject:item];;
     } else {
         [self.toDoItems addObject:item];
     }
-    
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
@@ -85,7 +81,6 @@ static NSString *const highPriority = @"High priority ";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"ListPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                             forIndexPath:indexPath];
@@ -111,7 +106,6 @@ static NSString *const highPriority = @"High priority ";
     [formatter setTimeStyle:NSDateFormatterMediumStyle];
     NSString *prettyDate = [formatter stringFromDate:toDoItem.date];
     cell.detailTextLabel.text = [stringPriority stringByAppendingString:prettyDate];
-    
     if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
