@@ -28,26 +28,24 @@ static NSString *const highPriority = @"High priority ";
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
     item1.priority = 0;
-    /*
-    NSString *dateStr = @"Tue, 25.05.2010 12:53:58";
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EE, dd.MM.YY HH:mm:ss"];
-    //NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    NSDate *date = [dateFormat dateFromString:dateStr];
-    [dateFormat release];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+
     
     item1.date = dateString;
     [self.toDoItems addObject:item1];
     IQToDoItem *item2 = [[IQToDoItem alloc] init];
     item2.itemName = @"Buy eggs";
     item2.priority = 1;
-    item2.date = dateString;
+    item2.date = [ dateFormatter dateFromString:dateString];
     [self.toDoItems addObject:item2];
     IQToDoItem *item3 = [[IQToDoItem alloc] init];
     item3.itemName = @"Read a book";
     item3.priority = 2;
-    item3.date = dateString;
-    [self.toDoItems addObject:item3];*/
+    item3.date = [ dateFormatter dateFromString:dateString];
+    [self.toDoItems addObject:item3];
 }
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue
