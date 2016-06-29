@@ -84,13 +84,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    /*NSString *dateStr = @"Tue, 25 May 2010 12:53:58";
-    // Convert string to date object
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"EE, d LLLL yyyy HH:mm:ss"];
-    NSDate *date = [dateFormat dateFromString:dateStr];
-    [self.datePicker setDate:date];*/
-    
     if ((toDoItem.itemName == nil) || (toDoItem.date == nil))
     {
         return;
