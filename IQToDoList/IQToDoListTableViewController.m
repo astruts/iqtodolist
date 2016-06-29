@@ -9,6 +9,7 @@
 #import "IQToDoListTableViewController.h"
 #import "IQToDoItem.h"
 #import "IQAddToDoItemViewController.h"
+#import "IQPriorities.h"
 
 @interface IQToDoListTableViewController ()
 
@@ -88,21 +89,7 @@ static NSString *const identifierOfAddMode= @"addItem";
                                                             forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
-    NSString * stringPriority;
-    switch (toDoItem.priority)
-    {
-        case 0:
-            stringPriority = lowPriority;
-            break;
-        case 1:
-            stringPriority = middlePriority;
-            break;
-        case 2:
-            stringPriority = highPriority;
-            break;
-        default:
-            break; 
-    }
+    NSString * stringPriority = [IQPriorities instance].priorities[toDoItem.priority];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterMediumStyle];

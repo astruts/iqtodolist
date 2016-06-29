@@ -22,7 +22,7 @@
                                 </constraints>
                                 <segments>
                                     <segment title="Low"/>
-                                    <segment title="Middle"/>
+                                    <segment title="Average"/>
                                     <segment title="High"/>
                                 </segments>
                             </segmentedControl>
@@ -190,29 +190,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="927" y="31"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="IQAddToDoItemViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQAddToDoItemViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="IQToDoListTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQToDoListTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="unwindToList:" candidateClass="UIStoryboardSegue"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
