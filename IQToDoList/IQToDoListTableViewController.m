@@ -28,23 +28,17 @@ static NSString *const highPriority = @"High priority ";
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
     item1.priority = 0;
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EE, dd.MM.YY HH:mm:ss"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-
-    
-    item1.date = dateString;
+    item1.date = [NSDate date];
     [self.toDoItems addObject:item1];
     IQToDoItem *item2 = [[IQToDoItem alloc] init];
     item2.itemName = @"Buy eggs";
     item2.priority = 1;
-    item2.date = [ dateFormatter dateFromString:dateString];
+    item2.date = [NSDate date];
     [self.toDoItems addObject:item2];
     IQToDoItem *item3 = [[IQToDoItem alloc] init];
     item3.itemName = @"Read a book";
     item3.priority = 2;
-    item3.date = [ dateFormatter dateFromString:dateString];
+    item3.date = [NSDate date];
     [self.toDoItems addObject:item3];
 }
 
@@ -112,7 +106,12 @@ static NSString *const highPriority = @"High priority ";
         default:
             break; 
     }
-    cell.detailTextLabel.text = [stringPriority stringByAppendingString:toDoItem.date.description];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSString *prettyDate = [formatter stringFromDate:toDoItem.date];
+    cell.detailTextLabel.text = [stringPriority stringByAppendingString:prettyDate];
+    
     if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {

@@ -53,12 +53,6 @@
         self.toDoItem.priority = self.segmentedControl.selectedSegmentIndex;
         self.toDoItem.date = self.datePicker.date;
         
-        /*NSString *dateStr = @"Tue, 25 May 2010 12:53:58";
-        // Convert string to date object
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"EE, d LLLL yyyy HH:mm:ss"];
-        self.toDoItem.date = [dateFormat dateFromString:dateStr];*/
-        
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = self.toDoItem.date;
         localNotification.alertBody = self.toDoItem.itemName;
