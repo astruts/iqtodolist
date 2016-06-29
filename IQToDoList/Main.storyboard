@@ -34,15 +34,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-3a-4Li">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="280" type="user" id="GaL-as-mj6"/>
-                                    <constraint firstAttribute="height" constant="162" type="user" id="hDr-rP-opX"/>
-                                </constraints>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-3a-4Li">
                                 <date key="date" timeIntervalSinceReferenceDate="488448300.21384901">
                                     <!--2016-06-24 08:05:00 +0000-->
                                 </date>
-                                <locale key="locale" localeIdentifier="en_MT"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
                                     <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
@@ -68,15 +63,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="201" id="4tL-Ic-9Yj"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="GJ0-1V-GR6"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Goz-Sx-6BA"/>
                             <constraint firstAttribute="trailing" secondItem="IjJ-MI-Sdd" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="M6p-o4-N7p"/>
                             <constraint firstItem="Raa-HB-c3M" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="146" id="UwB-KE-5P4"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="centerY" secondItem="Raa-HB-c3M" secondAttribute="centerY" type="default" id="ZqJ-Ye-6dr"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="90" id="anY-om-l3z"/>
+                            <constraint firstAttribute="trailing" secondItem="ZjK-3a-4Li" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="dFQ-E2-tnP"/>
                             <constraint firstAttribute="trailing" secondItem="Raa-HB-c3M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uGl-t2-mLU"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uNf-FB-3Ye"/>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="vqt-6u-OS9"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="208" id="yZd-O3-oRo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vBN-D4-laL">
