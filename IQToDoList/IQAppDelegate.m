@@ -10,6 +10,9 @@
 
 @implementation IQAppDelegate
 
+static NSString *const notificationAlertTitle = @"Reminder";
+static NSString *const notificationAlertCancelButtonTitle = @"OK";
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -23,11 +26,12 @@
     
     [self preloadKeyboard];
     
-    // Handle launching from a notification
-    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (locationNotification) {
+//    // Handle launching from a notification
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
         // Set icon badge number to zero
-        application.applicationIconBadgeNumber = 0;
+        [self application:application didReceiveLocalNotification:localNotification];
+        //application.applicationIconBadgeNumber = 0;
     }
     
     return YES;
@@ -48,6 +52,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -171,20 +176,21 @@
 {
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notificationAlertTitle
                                                         message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:@"OK"
+                                                       delegate:self cancelButtonTitle:notificationAlertCancelButtonTitle
                                               otherButtonTitles:nil];
         [alert show];
+        application.applicationIconBadgeNumber--;
     }
-    // Set icon badge number to zero
-    application.applicationIconBadgeNumber = 0;
-    
-    // Request to reload table view data
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
-    
-    // Set icon badge number to zero
-    application.applicationIconBadgeNumber = 0;
+//    // Set icon badge number to zero
+//    application.applicationIconBadgeNumber = 0;
+//    
+//    // Request to reload table view data
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+//
+//    // Set icon badge number to zero
+//    application.applicationIconBadgeNumber = 0;
 }
 
 @end
