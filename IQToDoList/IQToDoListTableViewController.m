@@ -18,11 +18,14 @@
 
 @implementation IQToDoListTableViewController
 
+static NSString *const cellIdentifier = @"ListPrototypeCell";
 static NSString *const titleOfEditMode = @"Add To-Do Item";
 static NSString *const titleOfAddMode = @"Edit To-Do Item";
 static NSString *const lowPriority = @"Low priority ";
 static NSString *const middlePriority = @"Middle priority ";
 static NSString *const highPriority = @"High priority ";
+static NSString *const identifierOfEditMode= @"editItem";
+static NSString *const identifierOfAddMode= @"addItem";
 
 - (void)loadInitialData {
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
@@ -81,8 +84,7 @@ static NSString *const highPriority = @"High priority ";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"ListPrototypeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
                                                             forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
@@ -133,7 +135,7 @@ static NSString *const highPriority = @"High priority ";
 #pragma mark - Navigation
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:@"editItem"] && !self.tableView.editing) {
+    if ([identifier isEqualToString:identifierOfEditMode] && !self.tableView.editing) {
         return NO;
     }
     return YES;
@@ -143,10 +145,10 @@ static NSString *const highPriority = @"High priority ";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"addItem"]) {
+    if ([segue.identifier isEqualToString:identifierOfAddMode]) {
         [self prepareViewControllerForSegue:segue withItem:[[IQToDoItem alloc] init] withTitle:titleOfEditMode withIndexOfItem:0 isEditMode:NO];
     }
-    if ([segue.identifier isEqualToString:@"editItem"] && self.tableView.editing) {
+    if ([segue.identifier isEqualToString:identifierOfEditMode] && self.tableView.editing) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         IQToDoItem *toDoItemForEditing = [self.toDoItems objectAtIndex:indexPath.row];
         [self prepareViewControllerForSegue:segue withItem:toDoItemForEditing withTitle:titleOfAddMode withIndexOfItem:indexPath.row isEditMode:YES];
