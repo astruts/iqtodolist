@@ -74,7 +74,6 @@
         // Dismiss the view controller
         [self dismissViewControllerAnimated:YES completion:nil];
         
-        
     } else {
         self.toDoItem = nil;
     }
