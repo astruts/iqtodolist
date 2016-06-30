@@ -62,19 +62,21 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ZjK-3a-4Li" secondAttribute="bottom" constant="134" type="user" id="7ar-Z0-iKf"/>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="6" type="user" id="GJ0-1V-GR6"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="199" id="BwH-it-Xh7"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Goz-Sx-6BA"/>
-                            <constraint firstAttribute="trailing" secondItem="IjJ-MI-Sdd" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="M6p-o4-N7p"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="centerX" secondItem="dqY-eL-FLa" secondAttribute="centerX" type="default" id="JuH-Oz-uzc"/>
+                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="centerX" secondItem="IjJ-MI-Sdd" secondAttribute="centerX" type="default" id="UIU-nS-GTT"/>
                             <constraint firstItem="Raa-HB-c3M" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="146" id="UwB-KE-5P4"/>
                             <constraint firstItem="XN2-Se-uaQ" firstAttribute="centerY" secondItem="Raa-HB-c3M" secondAttribute="centerY" type="default" id="ZqJ-Ye-6dr"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="90" id="anY-om-l3z"/>
-                            <constraint firstAttribute="trailing" secondItem="ZjK-3a-4Li" secondAttribute="trailing" constant="6" type="user" id="dFQ-E2-tnP"/>
                             <constraint firstAttribute="trailing" secondItem="Raa-HB-c3M" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uGl-t2-mLU"/>
                             <constraint firstItem="IjJ-MI-Sdd" firstAttribute="leading" secondItem="dqY-eL-FLa" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="uNf-FB-3Ye"/>
-                            <constraint firstItem="ZjK-3a-4Li" firstAttribute="top" secondItem="dqY-eL-FLa" secondAttribute="top" constant="208" type="user" id="yZd-O3-oRo"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="nCE-4p-HRj" appends="YES" id="kcW-Xt-t3p"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="vBN-D4-laL">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AC6-I3-6rI">
@@ -97,6 +99,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjD-ss-PfV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HMv-th-6sW" userLabel="Exit" sceneMemberID="exit"/>
+                <swipeGestureRecognizer direction="right" id="nCE-4p-HRj">
+                    <connections>
+                        <action selector="CloseKeyboard:" destination="nLb-xf-RCk" id="lbg-0n-9XF"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1314" y="31"/>
         </scene>
@@ -190,6 +197,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="927" y="31"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="IQAddToDoItemViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQAddToDoItemViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="CloseKeyboard:" candidateClass="UISwipeGestureRecognizer"/>
+                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="IQToDoListTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQToDoListTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="unwindToList:" candidateClass="UIStoryboardSegue"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="UIStoryboardSegue" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
