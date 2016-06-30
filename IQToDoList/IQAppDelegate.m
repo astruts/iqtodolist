@@ -19,11 +19,6 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];*/
-    
     [self preloadKeyboard];
     
     [self retreiveStoredNotifications:launchOptions application:application];
@@ -69,7 +64,6 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
                                                        delegate:self cancelButtonTitle:notificationAlertCancelButtonTitle
                                               otherButtonTitles:nil];
         [alert show];
-        //application.applicationIconBadgeNumber--;
     }
 }
 

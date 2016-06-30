@@ -16,4 +16,6 @@
 @property (assign) NSInteger indexItemInArray;
 @property (assign) NSInteger countOfArray;
 
+- (IBAction)CloseKeyboard:(UISwipeGestureRecognizer *)sender;
+
 @end
