@@ -84,7 +84,6 @@ static NSString *const identifierOfAddMode= @"addItem";
     return [self.toDoItems count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
                                                             forIndexPath:indexPath];
@@ -113,38 +112,7 @@ static NSString *const identifierOfAddMode= @"addItem";
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //remove from UILocalNotification
-        NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-        for (UILocalNotification *notification in scheduledNotifications)
-        {
-            //Get the ID you set when creating the notification
-            NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
-                
-            if ([stringIdentifierOfLocalNotification intValue] == indexPath.row)
-            {
-                [[UIApplication sharedApplication] cancelLocalNotification:notification];
-                //Re-create the localnotification with new data and the someValueYouGaveWhenCreatingCouldBeAnIdentifierOfAnObject
-                break;
-            }
-        }
-        //remove from NSMutableArray
-        [_toDoItems removeObjectAtIndex:indexPath.row];
-        //remove from table view
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        //recalculate userinfo UILocalNotification
-        NSInteger notifCount = [[[UIApplication sharedApplication] scheduledLocalNotifications] count];
-        for (int j = 0; j < notifCount; j++) {
-            UILocalNotification *notification = [[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:j];
-            if ([notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] > [NSString stringWithFormat:@"%i", indexPath.row]) {
-                NSInteger integerIdentifierOfLocalNotification = [[notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] intValue];
-                [[UIApplication sharedApplication] cancelLocalNotification:notification];
-                integerIdentifierOfLocalNotification--;
-                NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", integerIdentifierOfLocalNotification]
-                                                                     forKey:keyOfIdentifierOfLocalNotification];
-                [notification setUserInfo:infoDict];
-                [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-            }
-        }
+        [self deleteRowAtIndexPath:indexPath];
     }
 }
 
@@ -186,6 +154,40 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 #pragma mark - Private methods
 
+- (void) deleteRowAtIndexPath:(NSIndexPath *)indexPath {
+    //remove from UILocalNotification
+    NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (UILocalNotification *notification in scheduledNotifications)
+    {
+        //Get the ID you set when creating the notification
+        NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
+    
+        if ([stringIdentifierOfLocalNotification intValue] == indexPath.row)
+        {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            break;
+        }
+    }
+    //remove from NSMutableArray
+    [_toDoItems removeObjectAtIndex:indexPath.row];
+    //remove from table view
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    //recalculate userinfo UILocalNotification
+    NSInteger notifCount = [[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+    for (int j = 0; j < notifCount; j++) {
+        UILocalNotification *notification = [[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:j];
+        if ([notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] > [NSString stringWithFormat:@"%i", indexPath.row]) {
+            NSInteger integerIdentifierOfLocalNotification = [[notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] intValue];
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            integerIdentifierOfLocalNotification--;
+            NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", integerIdentifierOfLocalNotification]
+                                                                 forKey:keyOfIdentifierOfLocalNotification];
+            [notification setUserInfo:infoDict];
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
+}
+
 - (void)prepareViewControllerForSegue:(UIStoryboardSegue *)segue
                              withItem:(IQToDoItem *)item
                             withTitle:(NSString *)title
@@ -199,6 +201,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     viewController.title = title;
     viewController.indexItemInArray = numberOfItem;
     viewController.isEditMode = editMode;
+    viewController.countOfArray = [self.toDoItems count];
 }
 
 @end
