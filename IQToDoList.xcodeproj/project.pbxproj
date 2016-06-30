@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		655C006B1D2562B400D20765 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 655C00691D2562B400D20765 /* Model.xcdatamodeld */; };
 		65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E11D1ABCAB0003D515 /* IQToDoItem.m */; };
 		65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */; };
 		65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		655C006A1D2562B400D20765 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		65E730E01D1ABCAB0003D515 /* IQToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoItem.h; sourceTree = "<group>"; };
 		65E730E11D1ABCAB0003D515 /* IQToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoItem.m; sourceTree = "<group>"; };
 		65E730E31D1AC73E0003D515 /* IQAddToDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAddToDoItemViewController.h; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		655C00681D25624C00D20765 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				655C00691D2562B400D20765 /* Model.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		84E718A81D1AB25A00394933 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 		84E718BC1D1AB25A00394933 /* IQToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				655C00681D25624C00D20765 /* CoreData */,
 				84E718C51D1AB25A00394933 /* IQAppDelegate.h */,
 				84E718C61D1AB25A00394933 /* IQAppDelegate.m */,
 				65E730E31D1AC73E0003D515 /* IQAddToDoItemViewController.h */,
@@ -208,6 +219,7 @@
 				84E718C31D1AB25A00394933 /* main.m in Sources */,
 				84E718C71D1AB25A00394933 /* IQAppDelegate.m in Sources */,
 				65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */,
+				655C006B1D2562B400D20765 /* Model.xcdatamodeld in Sources */,
 				65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */,
 				65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */,
 				84E718D01D1AB25A00394933 /* IQToDoList.xcdatamodeld in Sources */,
@@ -294,6 +306,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
 				INFOPLIST_FILE = "IQToDoList/IQToDoList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -308,6 +321,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
 				INFOPLIST_FILE = "IQToDoList/IQToDoList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -337,6 +351,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		655C00691D2562B400D20765 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				655C006A1D2562B400D20765 /* Model.xcdatamodel */,
+			);
+			currentVersion = 655C006A1D2562B400D20765 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = CoreData/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		84E718CE1D1AB25A00394933 /* IQToDoList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

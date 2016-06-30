@@ -76,6 +76,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="nCE-4p-HRj" appends="YES" id="kcW-Xt-t3p"/>
+                            <outletCollection property="gestureRecognizers" destination="Z8f-Ho-yLy" appends="YES" id="8J7-7K-B4t"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="vBN-D4-laL">
@@ -102,6 +103,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <swipeGestureRecognizer direction="down" id="nCE-4p-HRj">
                     <connections>
                         <action selector="CloseKeyboard:" destination="nLb-xf-RCk" id="lbg-0n-9XF"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="Z8f-Ho-yLy">
+                    <connections>
+                        <action selector="CloseKeyboardUp:" destination="nLb-xf-RCk" id="7Hl-OJ-qQC"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -197,30 +203,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="927" y="31"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="IQAddToDoItemViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQAddToDoItemViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="CloseKeyboard:" candidateClass="UISwipeGestureRecognizer"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="IQToDoListTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IQToDoListTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="unwindToList:" candidateClass="UIStoryboardSegue"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
