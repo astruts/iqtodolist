@@ -21,8 +21,6 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 {
     [self preloadKeyboard];
     
-    [self registerNotificationsIfNeeded];
-    
     [self retreiveStoredNotifications:launchOptions application:application];
     
     return YES;
@@ -173,19 +171,6 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
     [lagFreeField becomeFirstResponder];
     [lagFreeField resignFirstResponder];
     [lagFreeField removeFromSuperview];
-}
-
-- (void)registerNotificationsIfNeeded
-{
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        // Register the supported interaction types.
-        UIUserNotificationType types = UIUserNotificationTypeBadge |
-        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        UIUserNotificationSettings *mySettings =
-        [UIUserNotificationSettings settingsForTypes:types categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
-    }
 }
 
 - (void)retreiveStoredNotifications:(NSDictionary *)launchOptions application:(UIApplication *)application
