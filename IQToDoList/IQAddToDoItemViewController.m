@@ -34,7 +34,6 @@ static NSString *const notificationAlertAction = @"Show me the item";
         self.toDoItem = nil;
         return;
     }
-    
     if (self.isEditMode) {
         if ((![self.textBeforeEdit isEqualToString: self.textField.text]) ||
             (self.priorityBeforeEdit != self.segmentedControl.selectedSegmentIndex) ||
@@ -64,13 +63,16 @@ static NSString *const notificationAlertAction = @"Show me the item";
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
         localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
         
+        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", self.indexItemInArray] forKey:@"notification"];
+        localNotification.userInfo = infoDict;
+        
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
 //        // Request to reload table view data
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
         
-        // Dismiss the view controller
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        // Dismiss the view controller
+//        [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         self.toDoItem = nil;
     }

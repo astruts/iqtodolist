@@ -26,7 +26,7 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
     
     [self preloadKeyboard];
     
-//    // Handle launching from a notification
+    // Handle launching from a notification
     UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotification) {
         // Set icon badge number to zero
