@@ -47,6 +47,7 @@
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="2Pj-Rv-afI" appends="YES" id="XYh-6Y-wsa"/>
+                            <outletCollection property="gestureRecognizers" destination="P4a-U2-Dty" appends="YES" id="GI4-h6-Asr"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="vBN-D4-laL">
@@ -73,6 +74,11 @@
                 <swipeGestureRecognizer direction="down" id="2Pj-Rv-afI">
                     <connections>
                         <action selector="CloseKeyboard:" destination="nLb-xf-RCk" id="zub-bv-cyR"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="P4a-U2-Dty">
+                    <connections>
+                        <action selector="CloseKeyboardUp:" destination="nLb-xf-RCk" id="Fgi-Kr-DTM"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
