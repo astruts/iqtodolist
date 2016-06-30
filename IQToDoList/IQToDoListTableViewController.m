@@ -9,6 +9,7 @@
 #import "IQToDoListTableViewController.h"
 #import "IQToDoItem.h"
 #import "IQAddToDoItemViewController.h"
+#import "IQPriorities.h"
 
 @interface IQToDoListTableViewController ()
 
@@ -24,6 +25,7 @@ static NSString *const titleOfAddMode = @"Edit To-Do Item";
 static NSString *const lowPriority = @"Low priority ";
 static NSString *const middlePriority = @"Middle priority ";
 static NSString *const highPriority = @"High priority ";
+static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 static NSString *const identifierOfEditMode= @"editItem";
 static NSString *const identifierOfAddMode= @"addItem";
 
@@ -88,21 +90,7 @@ static NSString *const identifierOfAddMode= @"addItem";
                                                             forIndexPath:indexPath];
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
-    NSString * stringPriority;
-    switch (toDoItem.priority)
-    {
-        case 0:
-            stringPriority = lowPriority;
-            break;
-        case 1:
-            stringPriority = middlePriority;
-            break;
-        case 2:
-            stringPriority = highPriority;
-            break;
-        default:
-            break; 
-    }
+    NSString * stringPriority = [IQPriorities instance].priorities[toDoItem.priority];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterMediumStyle];
@@ -125,10 +113,38 @@ static NSString *const identifierOfAddMode= @"addItem";
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //remove from UILocalNotification
+        NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+        for (UILocalNotification *notification in scheduledNotifications)
+        {
+            //Get the ID you set when creating the notification
+            NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
+                
+            if ([stringIdentifierOfLocalNotification intValue] == indexPath.row)
+            {
+                [[UIApplication sharedApplication] cancelLocalNotification:notification];
+                //Re-create the localnotification with new data and the someValueYouGaveWhenCreatingCouldBeAnIdentifierOfAnObject
+                break;
+            }
+        }
         //remove from NSMutableArray
         [_toDoItems removeObjectAtIndex:indexPath.row];
         //remove from table view
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //recalculate userinfo UILocalNotification
+        NSInteger notifCount = [[[UIApplication sharedApplication] scheduledLocalNotifications] count];
+        for (int j = 0; j < notifCount; j++) {
+            UILocalNotification *notification = [[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:j];
+            if ([notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] > [NSString stringWithFormat:@"%i", indexPath.row]) {
+                NSInteger integerIdentifierOfLocalNotification = [[notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] intValue];
+                [[UIApplication sharedApplication] cancelLocalNotification:notification];
+                integerIdentifierOfLocalNotification--;
+                NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", integerIdentifierOfLocalNotification]
+                                                                     forKey:keyOfIdentifierOfLocalNotification];
+                [notification setUserInfo:infoDict];
+                [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+            }
+        }
     }
 }
 

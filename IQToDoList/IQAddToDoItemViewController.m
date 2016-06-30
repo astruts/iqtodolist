@@ -27,6 +27,7 @@
 @implementation IQAddToDoItemViewController
 
 static NSString *const notificationAlertAction = @"Show me the item";
+static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 
 @synthesize toDoItem;
 
@@ -37,7 +38,6 @@ static NSString *const notificationAlertAction = @"Show me the item";
         self.toDoItem = nil;
         return;
     }
-    
     if (self.isEditMode) {
         if ((![self.textBeforeEdit isEqualToString: self.textField.text]) ||
             (self.priorityBeforeEdit != self.segmentedControl.selectedSegmentIndex) ||
@@ -56,24 +56,29 @@ static NSString *const notificationAlertAction = @"Show me the item";
         self.toDoItem.itemName = self.textField.text;
         self.toDoItem.completed = NO;
         self.toDoItem.priority = self.segmentedControl.selectedSegmentIndex;
+        
         NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
         self.toDoItem.date = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
         //self.toDoItem.date = self.datePicker.date;
         
-        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = self.toDoItem.date;
         localNotification.alertBody = self.toDoItem.itemName;
         localNotification.alertAction = notificationAlertAction;
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
         localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
         
+        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", self.indexItemInArray]
+                                                             forKey:keyOfIdentifierOfLocalNotification];
+        localNotification.userInfo = infoDict;
+        
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
 //        // Request to reload table view data
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
         
-        // Dismiss the view controller
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        // Dismiss the view controller
+//        [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         self.toDoItem = nil;
     }
