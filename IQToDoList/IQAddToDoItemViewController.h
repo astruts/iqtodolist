@@ -14,5 +14,6 @@
 @property (assign) BOOL isEditMode;
 @property (strong, nonatomic) IQToDoItem *toDoItem;
 @property (assign) NSInteger indexItemInArray;
+- (IBAction)CloseKeyboard:(UISwipeGestureRecognizer *)sender;
 
 @end

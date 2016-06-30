@@ -19,9 +19,6 @@
 @property (assign) NSInteger priorityBeforeEdit;
 @property (weak, nonatomic) NSDate *dateBeforeEdit;
 
-@property (nonatomic, assign) id currentResponder;
-@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *ClaseKeyboard;
-
 @end
 
 @implementation IQAddToDoItemViewController
@@ -30,6 +27,7 @@ static NSString *const notificationAlertAction = @"Show me the item";
 static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 
 @synthesize toDoItem;
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -86,10 +84,6 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnSwipe:)];
-    [self.view addGestureRecognizer:swipe];
-    
     // Do any additional setup after loading the view.
     if ((toDoItem.itemName == nil) || (toDoItem.date == nil))
     {
@@ -103,23 +97,13 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
     self.datePicker.date = toDoItem.date;
 }
 
-//Implement the below delegate method:
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.currentResponder = textField;
-}
-
-//Implement resignOnSwipe:
-- (void)resignOnSwipe:(id)sender {
-    [self.currentResponder resignFirstResponder];
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-//declare a property to store your current responder
-
+- (IBAction)CloseKeyboard:(UISwipeGestureRecognizer *)sender {
+    [self.textField resignFirstResponder];
+}
 
 @end
