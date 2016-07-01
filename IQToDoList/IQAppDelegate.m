@@ -64,6 +64,7 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
                                                        delegate:self cancelButtonTitle:notificationAlertCancelButtonTitle
                                               otherButtonTitles:nil];
         [alert show];
+        application.applicationIconBadgeNumber--;
     }
 }
 

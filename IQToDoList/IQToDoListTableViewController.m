@@ -67,6 +67,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //[[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)didReceiveMemoryWarning {
