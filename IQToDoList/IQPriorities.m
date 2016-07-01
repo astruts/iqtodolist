@@ -10,6 +10,10 @@
 
 @implementation IQPriorities
 
+static NSString *const lowPriority = @"Low priority ";
+static NSString *const averagePriority = @"Average priority ";
+static NSString *const highPriority = @"High priority ";
+
 + (instancetype)instance
 {
     static IQPriorities *instance = nil;
@@ -23,9 +27,9 @@
 - (id)init
 {
     if (self = [super init]) {
-        _priorities = @[@"Low priority ",
-                        @"Average priority ",
-                        @"High priority ",];
+        _priorities = @[lowPriority,
+                        averagePriority,
+                        highPriority,];
     }
     return self;
 }

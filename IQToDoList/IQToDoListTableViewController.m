@@ -10,6 +10,8 @@
 #import "IQToDoItem.h"
 #import "IQAddToDoItemViewController.h"
 #import "IQPriorities.h"
+#import "IQFetchRequestController.h"
+#import "ToDoItemMO.h"
 
 @interface IQToDoListTableViewController ()
 
@@ -77,6 +79,45 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 #pragma mark - Table view data source
 
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath
+{
+    ToDoItemMO *toDoItem = [[[IQFetchRequestController new] fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    // Populate cell from the NSManagedObject instance
+    cell.textLabel.text = toDoItem.itemName;
+    //NSString *stringPriority = [IQPriorities instance].priorities[toDoItem.itemPriority];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSString *prettyDate = [formatter stringFromDate:toDoItem.itemDate];
+    //cell.detailTextLabel.text = [stringPriority stringByAppendingString:prettyDate];
+    if (toDoItem.itemIsChecked) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    // Set up the cell
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [[[[IQFetchRequestController new] fetchedResultsController] sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id< NSFetchedResultsSectionInfo> sectionInfo = [[[IQFetchRequestController new] fetchedResultsController] sections][section];
+    return [sectionInfo numberOfObjects];
+}
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -102,7 +143,7 @@ static NSString *const identifierOfAddMode= @"addItem";
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
-}
+}*/
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,6 +244,48 @@ static NSString *const identifierOfAddMode= @"addItem";
     viewController.indexItemInArray = numberOfItem;
     viewController.isEditMode = editMode;
     viewController.countOfArray = [self.toDoItems count];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+        case NSFetchedResultsChangeUpdate:
+            break;
+    }
+}
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] endUpdates];
 }
 
 @end
