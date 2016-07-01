@@ -33,17 +33,17 @@ static NSString *const identifierOfAddMode= @"addItem";
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
     item1.itemName = @"Buy milk";
     item1.priority = 0;
-    item1.date = [NSDate date];
+    item1.date = [NSDate dateWithTimeIntervalSinceReferenceDate:floor([[NSDate date] timeIntervalSinceReferenceDate] / 60.0) * 60.0];
     [self.toDoItems addObject:item1];
     IQToDoItem *item2 = [[IQToDoItem alloc] init];
     item2.itemName = @"Buy eggs";
     item2.priority = 1;
-    item2.date = [NSDate date];
+    item2.date = [NSDate dateWithTimeIntervalSinceReferenceDate:floor([[NSDate date] timeIntervalSinceReferenceDate] / 60.0) * 60.0];
     [self.toDoItems addObject:item2];
     IQToDoItem *item3 = [[IQToDoItem alloc] init];
     item3.itemName = @"Read a book";
     item3.priority = 2;
-    item3.date = [NSDate date];
+    item3.date = [NSDate dateWithTimeIntervalSinceReferenceDate:floor([[NSDate date] timeIntervalSinceReferenceDate] / 60.0) * 60.0];
     [self.toDoItems addObject:item3];
 }
 
