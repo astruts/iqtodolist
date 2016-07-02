@@ -50,7 +50,7 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    //[self saveContext];//
+    [[self coreDataManager] saveContext];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
