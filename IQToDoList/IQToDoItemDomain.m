@@ -7,34 +7,34 @@
 //
 
 #import "IQToDoItemDomain.h"
-#import "IQCoreDataManager.h"
-#import "ToDoItemMO.h"
 
 @interface IQToDoItemDomain ()
 
-@property (strong, nonatomic) IQCoreDataManager *coreDataManager;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
 @implementation IQToDoItemDomain
 
-- (void)initializeIQToDoItemDomain:(IQCoreDataManager *)coreDataManager {
-    [self  setCoreDataManager:coreDataManager];
+- (void)initializeIQToDoItemDomain:(NSManagedObjectContext *)managedObjectContext {
+    [self  setManagedObjectContext:managedObjectContext];
 }
 
-- (void) createToDoItem:(ToDoItemMO *)newToDoItem {
-    [[[self coreDataManager] managedObjectContext] insertObject:newToDoItem];
-    [[[self coreDataManager] managedObjectContext] save:nil];
+- (void) createToDoItem:(ToDoItemMO *)youngToDoItem {
+    [[self managedObjectContext] insertObject:youngToDoItem];
+    [[self managedObjectContext] save:nil];
 }
 
-- (void) updateToDoItem:(ToDoItemMO *)currentToDoItem :(ToDoItemMO *)newToDoItem {
-    currentToDoItem = newToDoItem;
-    [[[self coreDataManager] managedObjectContext] save:nil];
+- (void) updateToDoItem:(ToDoItemMO *)currentToDoItem :(ToDoItemMO *)youngToDoItem {
+    [[self managedObjectContext] deleteObject:currentToDoItem];
+    [[self managedObjectContext] insertObject:youngToDoItem];
+    //currentToDoItem = youngToDoItem;
+    [[self managedObjectContext] save:nil];
 }
 
 - (void) deleteToDoItem:(ToDoItemMO *)currentToDoItem {
-    [[[self coreDataManager] managedObjectContext] deleteObject:currentToDoItem];
-    [[[self coreDataManager] managedObjectContext] save:nil];
+    [[self managedObjectContext] deleteObject:currentToDoItem];
+    [[self managedObjectContext] save:nil];
 }
 
 @end

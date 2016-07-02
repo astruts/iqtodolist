@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IQToDoItem.h"
+#import "ToDoItemMO.h"
 
 @interface IQAddToDoItemViewController : UIViewController
 
 @property (assign) BOOL isEditMode;
-@property (strong, nonatomic) IQToDoItem *toDoItem;
-@property (assign) NSInteger indexItemInArray;
-@property (assign) NSInteger countOfArray;
+@property (strong, nonatomic) ToDoItemMO *youngToDoItem;
+@property (strong, nonatomic) ToDoItemMO *currentToDoItem;
+@property (assign) NSNumber *indexItemInArray;
 
 - (IBAction)CloseKeyboard:(UISwipeGestureRecognizer *)sender;
 - (IBAction)CloseKeyboardUp:(UISwipeGestureRecognizer *)sender;

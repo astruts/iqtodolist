@@ -15,7 +15,7 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setCoreDataManager:[[IQCoreDataManager alloc] init]];
+    [self setCoreDataManager:[IQCoreDataManager new]];
     
     [self preloadKeyboard];
     

@@ -13,6 +13,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize toDoItem = _toDoItem;
 
 - (void)saveContext
 {
@@ -26,6 +27,13 @@
             abort();
         }
     }
+}
+
+- (ToDoItemMO *)toDoItem
+{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ToDoItem" inManagedObjectContext:_managedObjectContext];
+    _toDoItem = [[ToDoItemMO alloc] initWithEntity:entity insertIntoManagedObjectContext:_managedObjectContext];
+    return _toDoItem;
 }
 
 #pragma mark - Core Data stack

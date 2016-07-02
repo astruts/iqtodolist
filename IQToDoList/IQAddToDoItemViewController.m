@@ -7,6 +7,7 @@
 //
 
 #import "IQAddToDoItemViewController.h"
+#import "IQAppDelegate.h"
 
 @interface IQAddToDoItemViewController ()
 
@@ -15,63 +16,45 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
-@property (weak, nonatomic) NSString *textBeforeEdit;
-@property (assign) NSInteger priorityBeforeEdit;
-@property (weak, nonatomic) NSDate *dateBeforeEdit;
-
 @end
 
 @implementation IQAddToDoItemViewController
 
+//@synthesize newToDoItem = _newToDoItem;
+
 static NSString *const notificationAlertAction = @"Show me the item";
 static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
-
-@synthesize toDoItem;
-
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ((sender == self.cancelButton) ||
         (self.textField.text.length <= 0))
     {
-        self.toDoItem = nil;
+        self.youngToDoItem = nil;
         return;
     }
     if (self.isEditMode) {
-        if ((![self.textBeforeEdit isEqualToString: self.textField.text]) ||
-            (self.priorityBeforeEdit != self.segmentedControl.selectedSegmentIndex) ||
-            (![self.dateBeforeEdit isEqualToDate: self.datePicker.date]))
+        if ((![self.currentToDoItem.itemName isEqualToString: self.textField.text]) ||
+            ([self.currentToDoItem.itemPriority intValue] != self.segmentedControl.selectedSegmentIndex) ||
+            (![self.currentToDoItem.itemDate isEqualToDate: self.datePicker.date]))
         {
             [self deleteLocalNotification];
-            [self fillToDoItemIfNotEmpty:self.indexItemInArray];
+            [self fillToDoItemIfNotEmpty];
         }
     } else {
-        [self fillToDoItemIfNotEmpty:self.countOfArray];
+        [self fillToDoItemIfNotEmpty];
     }
 }
 
-- (void)fillToDoItemIfNotEmpty:(NSInteger)indexOfItemInArrayForNotification
+- (void)fillToDoItemIfNotEmpty
 {
-    self.toDoItem.itemName = self.textField.text;
-    self.toDoItem.completed = NO;
-    self.toDoItem.priority = self.segmentedControl.selectedSegmentIndex;
-    
+    IQAppDelegate *appDelegate = (IQAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.youngToDoItem = [appDelegate.coreDataManager toDoItem];
+    [self.youngToDoItem setItemName:self.textField.text];
+    self.youngToDoItem.itemIsChecked = [NSNumber numberWithBool:NO];
+    self.youngToDoItem.itemPriority = [NSNumber numberWithInt:self.segmentedControl.selectedSegmentIndex];
     NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
-    self.toDoItem.date = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
-    NSDate *currentDate = [NSDate date];
-    if ([[self.toDoItem.date earlierDate:currentDate] isEqualToDate:currentDate])
-    {
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = self.toDoItem.date;
-        localNotification.alertBody = self.toDoItem.itemName;
-        localNotification.alertAction = notificationAlertAction;
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", indexOfItemInArrayForNotification]
-                                                                 forKey:keyOfIdentifierOfLocalNotification];
-        localNotification.userInfo = infoDict;
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    }
+    self.youngToDoItem.itemDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 
 - (void)deleteLocalNotification
@@ -81,7 +64,7 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
     {
         //Get the ID you set when creating the notification
         NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
-        if ([stringIdentifierOfLocalNotification intValue] == self.indexItemInArray)
+        if ([stringIdentifierOfLocalNotification intValue] == [self.indexItemInArray intValue])
         {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
             break;
@@ -93,16 +76,13 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:60];
-    if ((toDoItem.itemName == nil) || (toDoItem.date == nil))
+    if (self.currentToDoItem == nil)
     {
         return;
     }
-    self.textBeforeEdit = toDoItem.itemName;
-    self.textField.text = toDoItem.itemName;
-    self.priorityBeforeEdit = toDoItem.priority;
-    self.segmentedControl.selectedSegmentIndex = toDoItem.priority;
-    self.dateBeforeEdit = toDoItem.date;
-    self.datePicker.date = toDoItem.date;
+    self.textField.text = self.currentToDoItem.itemName;
+    self.segmentedControl.selectedSegmentIndex = [self.currentToDoItem.itemPriority intValue];
+    self.datePicker.date = self.currentToDoItem.itemDate;
 }
 
 - (void)didReceiveMemoryWarning {

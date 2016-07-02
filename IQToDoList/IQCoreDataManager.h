@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ToDoItemMO.h"
 
 @interface IQCoreDataManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (readonly, strong, nonatomic) ToDoItemMO *toDoItem;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
