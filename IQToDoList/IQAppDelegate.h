@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IQCoreDataManager.h"
 
 @interface IQAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) IQCoreDataManager *coreDataManager;
 
 @end

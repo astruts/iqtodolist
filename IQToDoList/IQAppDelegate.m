@@ -15,6 +15,8 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setCoreDataManager:[[IQCoreDataManager alloc] init]];
+    
     [self preloadKeyboard];
     
     [self retreiveStoredNotifications:launchOptions application:application];
@@ -48,7 +50,7 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    //[self saveContext];
+    //[self saveContext];//
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification

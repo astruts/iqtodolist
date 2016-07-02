@@ -14,7 +14,6 @@
 		8491F2B11D26727900AA3B6D /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2AF1D26727900AA3B6D /* IQToDoList.xcdatamodeld */; };
 		8491F2B41D26757700AA3B6D /* ToDoItemMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2B31D26757700AA3B6D /* ToDoItemMO.m */; };
 		8491F2B71D269F2500AA3B6D /* IQCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2B61D269F2500AA3B6D /* IQCoreDataManager.m */; };
-		8491F2BA1D26A11300AA3B6D /* IQFetchRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2B91D26A11300AA3B6D /* IQFetchRequestController.m */; };
 		84B441F61D24017400B41CBA /* IQPriorities.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B441F51D24017400B41CBA /* IQPriorities.m */; };
 		84E718B51D1AB25A00394933 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B41D1AB25A00394933 /* UIKit.framework */; };
 		84E718B71D1AB25A00394933 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E718B61D1AB25A00394933 /* Foundation.framework */; };
@@ -42,8 +41,6 @@
 		8491F2B31D26757700AA3B6D /* ToDoItemMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoItemMO.m; sourceTree = "<group>"; };
 		8491F2B51D269F2500AA3B6D /* IQCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQCoreDataManager.h; sourceTree = "<group>"; };
 		8491F2B61D269F2500AA3B6D /* IQCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQCoreDataManager.m; sourceTree = "<group>"; };
-		8491F2B81D26A11300AA3B6D /* IQFetchRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQFetchRequestController.h; sourceTree = "<group>"; };
-		8491F2B91D26A11300AA3B6D /* IQFetchRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQFetchRequestController.m; sourceTree = "<group>"; };
 		84B441F41D24017400B41CBA /* IQPriorities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQPriorities.h; sourceTree = "<group>"; };
 		84B441F51D24017400B41CBA /* IQPriorities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQPriorities.m; sourceTree = "<group>"; };
 		84E718B11D1AB25A00394933 /* IQToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IQToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,8 +83,6 @@
 				8491F2B31D26757700AA3B6D /* ToDoItemMO.m */,
 				8491F2B51D269F2500AA3B6D /* IQCoreDataManager.h */,
 				8491F2B61D269F2500AA3B6D /* IQCoreDataManager.m */,
-				8491F2B81D26A11300AA3B6D /* IQFetchRequestController.h */,
-				8491F2B91D26A11300AA3B6D /* IQFetchRequestController.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -237,7 +232,6 @@
 				8491F2B11D26727900AA3B6D /* IQToDoList.xcdatamodeld in Sources */,
 				8491F2B41D26757700AA3B6D /* ToDoItemMO.m in Sources */,
 				8491F2B71D269F2500AA3B6D /* IQCoreDataManager.m in Sources */,
-				8491F2BA1D26A11300AA3B6D /* IQFetchRequestController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
