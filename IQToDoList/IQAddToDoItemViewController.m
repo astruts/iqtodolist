@@ -28,7 +28,6 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 
 @synthesize toDoItem;
 
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ((sender == self.cancelButton) ||
@@ -91,6 +90,7 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:60];
     if ((toDoItem.itemName == nil) || (toDoItem.date == nil))

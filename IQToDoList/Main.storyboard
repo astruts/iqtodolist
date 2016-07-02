@@ -25,36 +25,56 @@
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New to-do item" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IjJ-MI-Sdd">
                                                 <rect key="frame" x="8" y="10" width="584" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="1uZ-ng-inw"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="FGR-kk-BYN">
-                                                <rect key="frame" x="8" y="50" width="584" height="262"/>
+                                                <rect key="frame" x="8" y="50" width="584" height="270"/>
                                                 <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN2-Se-uaQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="55" height="21"/>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XN2-Se-uaQ">
+                                                        <rect key="frame" x="8" y="5" width="55" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Raa-HB-c3M">
-                                                        <rect key="frame" x="414" y="0.0" width="170" height="29"/>
+                                                        <rect key="frame" x="406" y="5" width="170" height="29"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="170" id="C5d-f1-f3a"/>
+                                                            <constraint firstAttribute="height" constant="28" id="e99-Oe-yHH"/>
                                                         </constraints>
                                                         <segments>
                                                             <segment title="Low"/>
                                                             <segment title="Average"/>
                                                             <segment title="High"/>
                                                         </segments>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="e99-Oe-yHH"/>
+                                                            </mask>
+                                                        </variation>
                                                     </segmentedControl>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="162" id="OIf-Pf-5I1"/>
+                                                </constraints>
+                                                <edgeInsets key="layoutMargins" top="5" left="8" bottom="175" right="8"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="OIf-Pf-5I1"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact" axis="vertical"/>
                                             </stackView>
                                         </subviews>
-                                        <edgeInsets key="layoutMargins" top="10" left="8" bottom="8" right="8"/>
+                                        <edgeInsets key="layoutMargins" top="10" left="8" bottom="0.0" right="8"/>
                                     </stackView>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZjK-3a-4Li">
                                         <rect key="frame" x="0.0" y="320" width="600" height="216"/>
+                                        <edgeInsets key="layoutMargins" top="8" left="20" bottom="8" right="8"/>
                                         <date key="date" timeIntervalSinceReferenceDate="488448300.21384901">
                                             <!--2016-06-24 08:05:00 +0000-->
                                         </date>
@@ -114,7 +134,7 @@
         <scene sceneID="MQw-o3-x1U">
             <objects>
                 <tableViewController id="bS8-Ci-gJ1" customClass="IQToDoListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="osO-rz-kfY">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="osO-rz-kfY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,7 +150,7 @@
                                             <rect key="frame" x="15" y="2" width="39" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="klr-yc-Ot3">
