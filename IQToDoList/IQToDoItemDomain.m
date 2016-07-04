@@ -27,8 +27,6 @@
 
 - (void) updateToDoItem:(ToDoItemMO *)currentToDoItem :(ToDoItemMO *)youngToDoItem {
     [self.managedObjectContext deleteObject:currentToDoItem];
-    [self.managedObjectContext insertObject:youngToDoItem];
-    //currentToDoItem = youngToDoItem;
     [[self managedObjectContext] save:nil];
 }
 

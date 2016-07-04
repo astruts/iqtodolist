@@ -20,6 +20,8 @@
 
 @implementation IQAddToDoItemViewController
 
+static NSInteger const countOfSecondsInOneMinute = 60;
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ((sender == self.cancelButton) ||
         (self.textField.text.length <= 0)) {
@@ -37,7 +39,7 @@
 }
 
 - (void)fillToDoItem {
-    NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / countOfSecondsInOneMinute) * countOfSecondsInOneMinute;
     NSDate *pickedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
     //Can not pick earlier then current time date
     NSDate *currentDate = [NSDate date];
@@ -56,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:60];
+    self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:countOfSecondsInOneMinute];
     if (self.currentToDoItem == nil)
     {
         return;

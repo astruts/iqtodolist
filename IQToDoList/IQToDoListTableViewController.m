@@ -40,8 +40,7 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue {
     IQAddToDoItemViewController *source = [segue sourceViewController];
-    if ((source.youngToDoItem == nil) ||
-        ([source.youngToDoItem isEqual:source.currentToDoItem])){
+    if (source.youngToDoItem == nil){
         return;
     }
     if (source.isEditMode) {
