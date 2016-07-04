@@ -10,8 +10,11 @@
 
 @implementation IQPriorities
 
-+ (instancetype)instance
-{
+static NSString *const lowPriority = @"Low priority ";
+static NSString *const averagePriority = @"Average priority ";
+static NSString *const highPriority = @"High priority ";
+
++ (instancetype)instance {
     static IQPriorities *instance = nil;
     @synchronized(self) {
         if (instance == nil)
@@ -20,16 +23,14 @@
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
-        _priorities = @[@"Low priority ",
-                        @"Average priority ",
-                        @"High priority ",];
-        
-        _colors = @[@"0xC2F7B1",
-                    @"0xF7F796",
-                    @"0xF6A3A3",];
+        _priorities = @[lowPriority,
+                        averagePriority,
+                        highPriority,];
+        _colors = @[[UIColor colorWithRed:194.0/255.0 green: 247.0/255.0 blue: 177.0/255.0 alpha: 1.0],
+                    [UIColor colorWithRed:247.0/255.0 green: 247.0/255.0 blue: 150.0/255.0 alpha: 1.0],
+                    [UIColor colorWithRed:246.0/255.0 green: 163.0/255.0 blue: 163.0/255.0 alpha: 1.0],];
     }
     return self;
 }

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IQToDoListTableViewController : UITableViewController
+@interface IQToDoListTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 
