@@ -60,6 +60,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     localNotification.alertAction = notificationAlertAction;
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
     
     NSManagedObjectID *managgedObjectId = toDoItem.objectID;
     NSString *stringID = [managgedObjectId.URIRepresentation absoluteString];
@@ -101,6 +102,9 @@ static NSString *const identifierOfAddMode= @"addItem";
 #pragma mark - Table view data source
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath {
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
     ToDoItemMO *toDoItem = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // Populate cell from the NSManagedObject instance
     cell.textLabel.text = toDoItem.itemName;
@@ -115,6 +119,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    cell.backgroundColor = [IQPriorities instance].colors[toDoItem.itemPriority.intValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -206,6 +211,21 @@ static NSString *const identifierOfAddMode= @"addItem";
     viewController.currentToDoItem = item;
     viewController.title = title;
     viewController.isEditMode = editMode;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //self.tableView.estimatedRowHeight = 70.0; // for example. Set your average height
+    //self.tableView.rowHeight = 70.0;
+    //self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.tableView reloadData];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    if (editing) {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Initialize FetchedResultsController

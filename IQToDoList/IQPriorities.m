@@ -28,6 +28,9 @@ static NSString *const highPriority = @"High priority ";
         _priorities = @[lowPriority,
                         averagePriority,
                         highPriority,];
+        _colors = @[[UIColor colorWithRed:194.0/255.0 green: 247.0/255.0 blue: 177.0/255.0 alpha: 1.0],
+                    [UIColor colorWithRed:247.0/255.0 green: 247.0/255.0 blue: 150.0/255.0 alpha: 1.0],
+                    [UIColor colorWithRed:246.0/255.0 green: 163.0/255.0 blue: 163.0/255.0 alpha: 1.0],];
     }
     return self;
 }
