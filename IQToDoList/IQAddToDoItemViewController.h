@@ -14,7 +14,6 @@
 @property (assign) BOOL isEditMode;
 @property (strong, nonatomic) ToDoItemMO *youngToDoItem;
 @property (strong, nonatomic) ToDoItemMO *currentToDoItem;
-@property (assign) NSNumber *indexItemInArray;
 
 - (IBAction)CloseKeyboard:(UISwipeGestureRecognizer *)sender;
 - (IBAction)CloseKeyboardUp:(UISwipeGestureRecognizer *)sender;

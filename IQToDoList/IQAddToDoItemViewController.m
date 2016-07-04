@@ -20,56 +20,37 @@
 
 @implementation IQAddToDoItemViewController
 
-//@synthesize newToDoItem = _newToDoItem;
-
-static NSString *const notificationAlertAction = @"Show me the item";
-static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ((sender == self.cancelButton) ||
-        (self.textField.text.length <= 0))
-    {
-        self.youngToDoItem = nil;
+        (self.textField.text.length <= 0)) {
         return;
     }
     if (self.isEditMode) {
         if ((![self.currentToDoItem.itemName isEqualToString: self.textField.text]) ||
             ([self.currentToDoItem.itemPriority intValue] != self.segmentedControl.selectedSegmentIndex) ||
-            (![self.currentToDoItem.itemDate isEqualToDate: self.datePicker.date]))
-        {
-            [self deleteLocalNotification];
-            [self fillToDoItemIfNotEmpty];
+            (![self.currentToDoItem.itemDate isEqualToDate: self.datePicker.date])) {
+            [self fillToDoItem];
         }
     } else {
-        [self fillToDoItemIfNotEmpty];
+        [self fillToDoItem];
     }
 }
 
-- (void)fillToDoItemIfNotEmpty
-{
+- (void)fillToDoItem {
+    NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    NSDate *pickedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+    //Can not pick earlier then current time date
+    NSDate *currentDate = [NSDate date];
+    if ([[pickedDate earlierDate:currentDate] isEqualToDate:pickedDate]) {
+        return;
+    }
+    
     IQAppDelegate *appDelegate = (IQAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.youngToDoItem = [appDelegate.coreDataManager toDoItem];
     [self.youngToDoItem setItemName:self.textField.text];
     self.youngToDoItem.itemIsChecked = [NSNumber numberWithBool:NO];
     self.youngToDoItem.itemPriority = [NSNumber numberWithInt:self.segmentedControl.selectedSegmentIndex];
-    NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
-    self.youngToDoItem.itemDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
-}
-
-- (void)deleteLocalNotification
-{
-    NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    for (UILocalNotification *notification in scheduledNotifications)
-    {
-        //Get the ID you set when creating the notification
-        NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
-        if ([stringIdentifierOfLocalNotification intValue] == [self.indexItemInArray intValue])
-        {
-            [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            break;
-        }
-    }
+    self.youngToDoItem.itemDate = pickedDate;
 }
 
 - (void)viewDidLoad {
@@ -83,6 +64,7 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
     self.textField.text = self.currentToDoItem.itemName;
     self.segmentedControl.selectedSegmentIndex = [self.currentToDoItem.itemPriority intValue];
     self.datePicker.date = self.currentToDoItem.itemDate;
+    self.youngToDoItem = nil;
 }
 
 - (void)didReceiveMemoryWarning {

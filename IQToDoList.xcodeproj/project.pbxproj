@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E11D1ABCAB0003D515 /* IQToDoItem.m */; };
 		65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */; };
 		65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */; };
 		65EBC9F21D1BD845005821E3 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EBC9F11D1BD845005821E3 /* Images-2.xcassets */; };
@@ -30,8 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		65E730E01D1ABCAB0003D515 /* IQToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoItem.h; sourceTree = "<group>"; };
-		65E730E11D1ABCAB0003D515 /* IQToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoItem.m; sourceTree = "<group>"; };
 		65E730E31D1AC73E0003D515 /* IQAddToDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAddToDoItemViewController.h; sourceTree = "<group>"; };
 		65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAddToDoItemViewController.m; sourceTree = "<group>"; };
 		65E730E61D1AC8E80003D515 /* IQToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoListTableViewController.h; sourceTree = "<group>"; };
@@ -131,8 +128,6 @@
 				84E718D61D1AB33400394933 /* Main.storyboard */,
 				65E730E61D1AC8E80003D515 /* IQToDoListTableViewController.h */,
 				65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */,
-				65E730E01D1ABCAB0003D515 /* IQToDoItem.h */,
-				65E730E11D1ABCAB0003D515 /* IQToDoItem.m */,
 				84B441F41D24017400B41CBA /* IQPriorities.h */,
 				84B441F51D24017400B41CBA /* IQPriorities.m */,
 				65EBC9F11D1BD845005821E3 /* Images-2.xcassets */,
@@ -232,7 +227,6 @@
 				84E718C71D1AB25A00394933 /* IQAppDelegate.m in Sources */,
 				65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */,
 				65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */,
-				65E730E21D1ABCAB0003D515 /* IQToDoItem.m in Sources */,
 				84B441F61D24017400B41CBA /* IQPriorities.m in Sources */,
 				8491F2B11D26727900AA3B6D /* IQToDoList.xcdatamodeld in Sources */,
 				8491F2B41D26757700AA3B6D /* ToDoItemMO.m in Sources */,

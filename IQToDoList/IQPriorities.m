@@ -14,8 +14,7 @@ static NSString *const lowPriority = @"Low priority ";
 static NSString *const averagePriority = @"Average priority ";
 static NSString *const highPriority = @"High priority ";
 
-+ (instancetype)instance
-{
++ (instancetype)instance {
     static IQPriorities *instance = nil;
     @synchronized(self) {
         if (instance == nil)
@@ -24,8 +23,7 @@ static NSString *const highPriority = @"High priority ";
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
         _priorities = @[lowPriority,
                         averagePriority,

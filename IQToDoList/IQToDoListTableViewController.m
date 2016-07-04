@@ -7,7 +7,6 @@
 //
 
 #import "IQToDoListTableViewController.h"
-#import "IQToDoItem.h"
 #import "IQAddToDoItemViewController.h"
 #import "IQPriorities.h"
 #import "ToDoItemMO.h"
@@ -16,7 +15,6 @@
 
 @interface IQToDoListTableViewController ()
 
-@property NSMutableArray *toDoItems;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) IQToDoItemDomain *toDoItemDomain;
@@ -26,79 +24,74 @@
 @implementation IQToDoListTableViewController
 
 static NSString *const cellIdentifier = @"ListPrototypeCell";
+
 static NSString *const titleOfEditMode = @"Add To-Do Item";
 static NSString *const titleOfAddMode = @"Edit To-Do Item";
+
 static NSString *const lowPriority = @"Low priority ";
 static NSString *const middlePriority = @"Middle priority ";
 static NSString *const highPriority = @"High priority ";
-static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
+
+static NSString *const notificationAlertAction = @"Show me the item";
+static NSString *const keyOfIdentifierOfLocalNotification = @"objectID";
+
 static NSString *const identifierOfEditMode= @"editItem";
 static NSString *const identifierOfAddMode= @"addItem";
 
-/*- (void)loadInitialData {
-    IQToDoItem *item1 = [[IQToDoItem alloc] init];
-    item1.itemName = @"Buy milk";
-    item1.priority = 0;
-    item1.date = [NSDate date];
-    [self.toDoItems addObject:item1];
-    IQToDoItem *item2 = [[IQToDoItem alloc] init];
-    item2.itemName = @"Buy eggs";
-    item2.priority = 1;
-    item2.date = [NSDate date];
-    [self.toDoItems addObject:item2];
-    IQToDoItem *item3 = [[IQToDoItem alloc] init];
-    item3.itemName = @"Read a book";
-    item3.priority = 2;
-    item3.date = [NSDate date];
-    [self.toDoItems addObject:item3];
-}*///
-
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue
-{
+- (IBAction)unwindToList:(UIStoryboardSegue *)segue {
     IQAddToDoItemViewController *source = [segue sourceViewController];
-    //ToDoItemMO *item = source.toDoItem;
-    if (source.youngToDoItem == nil) {
+    if ((source.youngToDoItem == nil) ||
+        ([source.youngToDoItem isEqual:source.currentToDoItem])){
         return;
     }
     if (source.isEditMode) {
-        //[self.toDoItems replaceObjectAtIndex:[source.indexItemInArray intValue]  withObject:item];//
+        [self deleteLocalNotification:source.currentToDoItem];
         [self.toDoItemDomain updateToDoItem:source.currentToDoItem :source.youngToDoItem];
+        [self addLocalNotification:source.youngToDoItem];
     } else {
-        //[self.toDoItems addObject:item];//
         [self.toDoItemDomain createToDoItem:source.youngToDoItem];
+        [self addLocalNotification:source.youngToDoItem];
     }
-    //[self.tableView reloadData];//
 }
 
-- (void)addLocalNotification
-{
-    /*NSDate *currentDate = [NSDate date];
-    if ([[self.toDoItem.itemDate earlierDate:currentDate] isEqualToDate:currentDate])
-    {
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = self.toDoItem.itemDate;
-        localNotification.alertBody = self.toDoItem.itemName;
-        localNotification.alertAction = notificationAlertAction;
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", indexOfItemInArrayForNotification]
-                                                             forKey:keyOfIdentifierOfLocalNotification];
-        localNotification.userInfo = infoDict;
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    }*/
+- (void)addLocalNotification:(ToDoItemMO *)toDoItem {
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = toDoItem.itemDate;
+    localNotification.alertBody = toDoItem.itemName;
+    localNotification.alertAction = notificationAlertAction;
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    NSManagedObjectID *managgedObjectId = toDoItem.objectID;
+    NSString *stringID = [managgedObjectId.URIRepresentation absoluteString];
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:stringID
+                                                         forKey:keyOfIdentifierOfLocalNotification];
+    localNotification.userInfo = infoDict;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
+- (void)deleteLocalNotification:(ToDoItemMO *)toDoItem {
+    NSManagedObjectID *managgedObjectId = toDoItem.objectID;
+    NSString *stringID = [managgedObjectId.URIRepresentation absoluteString];
+    NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (UILocalNotification *notification in scheduledNotifications) {
+        //Get the ID you set when creating the notification
+        NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
+        if ([stringIdentifierOfLocalNotification isEqualToString:stringID]) {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            break;
+        }
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.toDoItems = [[NSMutableArray alloc] init];//
     IQAppDelegate *appDelegate = (IQAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [[appDelegate coreDataManager] managedObjectContext];
     [self initializeFetchedResultsController:self.managedObjectContext];
     self.toDoItemDomain = [IQToDoItemDomain new];
     [self.toDoItemDomain initializeIQToDoItemDomain:self.managedObjectContext];
-    //[self loadInitialData];//
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    //[[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,9 +101,8 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 #pragma mark - Table view data source
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath
-{
-    ToDoItemMO *toDoItem = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath*)indexPath {
+    ToDoItemMO *toDoItem = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // Populate cell from the NSManagedObject instance
     cell.textLabel.text = toDoItem.itemName;
     NSString *stringPriority = [IQPriorities instance].priorities[toDoItem.itemPriority.intValue];
@@ -126,52 +118,21 @@ static NSString *const identifierOfAddMode= @"addItem";
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     // Set up the cell
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    id< NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
-}
-
-/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.toDoItems count];
+    id< NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
-                                                            forIndexPath:indexPath];
-    IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
-    cell.textLabel.text = toDoItem.itemName;
-    NSString * stringPriority = [IQPriorities instance].priorities[toDoItem.priority];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterMediumStyle];
-    [formatter setTimeStyle:NSDateFormatterMediumStyle];
-    NSString *prettyDate = [formatter stringFromDate:toDoItem.date];
-    cell.detailTextLabel.text = [stringPriority stringByAppendingString:prettyDate];
-    if (toDoItem.completed) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    return cell;
-}*/
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -204,39 +165,23 @@ static NSString *const identifierOfAddMode= @"addItem";
         [self prepareViewControllerForSegue:segue
                                    withItem:nil
                                   withTitle:titleOfEditMode
-                            withIndexOfItem:indexPath.row+1
                                  isEditMode:NO];
     }
     if ([segue.identifier isEqualToString:identifierOfEditMode] && self.tableView.editing) {
-        /*NSFetchRequest *request = [NSFetchRequest new];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ToDoItem"
-                                                  inManagedObjectContext:self.managedObjectContext];
-        [request setEntity:entity];
-        
-        NSPredicate *pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"empId = %d", 12345]];
-        [request setPredicate:pred];
-        
-        NSArray *empArray=[self.managedObjectContext executeFetchRequest:request error:nil];
-        ToDoItemMO *toDoItemForEditing;
-        if ([empArray count] > 0){
-            toDoItemForEditing = [empArray objectAtIndex:0];
-        }*/
-        ToDoItemMO *toDoItemForEditing = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        ToDoItemMO *toDoItemForEditing = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self prepareViewControllerForSegue:segue
                                    withItem:toDoItemForEditing
                                   withTitle:titleOfAddMode
-                            withIndexOfItem:indexPath.row
                                  isEditMode:YES];
     }
 }
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (!tableView.editing) {
-        ToDoItemMO *tappedItem = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        ToDoItemMO *tappedItem = [self.fetchedResultsController objectAtIndexPath:indexPath];
         tappedItem.itemIsChecked = [NSNumber numberWithBool:![tappedItem.itemIsChecked boolValue]];
         [tableView reloadRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationNone];
@@ -247,59 +192,26 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 - (void) deleteRowAtIndexPath:(NSIndexPath *)indexPath {
     //remove from UILocalNotification
-    NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    for (UILocalNotification *notification in scheduledNotifications)
-    {
-        //Get the ID you set when creating the notification
-        NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
-    
-        if ([stringIdentifierOfLocalNotification intValue] == indexPath.row)
-        {
-            [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            break;
-        }
-    }
-    //remove from NSMutableArray
-    //[_toDoItems removeObjectAtIndex:indexPath.row];//
     ToDoItemMO *toDoItem = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    [[self toDoItemDomain] deleteToDoItem:toDoItem];
-    //remove from table view
-    //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];//
-    //recalculate userinfo UILocalNotification
-    NSInteger notifCount = [[[UIApplication sharedApplication] scheduledLocalNotifications] count];
-    for (int j = 0; j < notifCount; j++) {
-        UILocalNotification *notification = [[[UIApplication sharedApplication] scheduledLocalNotifications] objectAtIndex:j];
-        if ([notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] > [NSString stringWithFormat:@"%i", indexPath.row]) {
-            NSInteger integerIdentifierOfLocalNotification = [[notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification] intValue];
-            [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            integerIdentifierOfLocalNotification--;
-            NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%i", integerIdentifierOfLocalNotification]
-                                                                 forKey:keyOfIdentifierOfLocalNotification];
-            [notification setUserInfo:infoDict];
-            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        }
-    }
+    [self deleteLocalNotification:toDoItem];
+    //remove from Data Base
+    [self.toDoItemDomain deleteToDoItem:toDoItem];
 }
 
 - (void)prepareViewControllerForSegue:(UIStoryboardSegue *)segue
                              withItem:(ToDoItemMO *)item
                             withTitle:(NSString *)title
-                      withIndexOfItem:(NSInteger)numberOfItem
-                           isEditMode:(BOOL)editMode
-{
+                           isEditMode:(BOOL)editMode {
     UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
     IQAddToDoItemViewController *viewController = (IQAddToDoItemViewController *)navController.topViewController;
-    
     viewController.currentToDoItem = item;
     viewController.title = title;
-    viewController.indexItemInArray = [NSNumber numberWithInt:numberOfItem];
     viewController.isEditMode = editMode;
 }
 
 #pragma mark - Initialize FetchedResultsController
 
-- (void)initializeFetchedResultsController:(NSManagedObjectContext *)managedObjectContext
-{
+- (void)initializeFetchedResultsController:(NSManagedObjectContext *)managedObjectContext {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ToDoItem"];
     NSSortDescriptor *itemNameSort = [NSSortDescriptor sortDescriptorWithKey:@"itemName" ascending:YES];
     [request setSortDescriptors:@[itemNameSort]];
@@ -318,33 +230,30 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [[self tableView] beginUpdates];
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[[self tableView] cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [[self tableView] endUpdates];
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
 }
 
 @end
