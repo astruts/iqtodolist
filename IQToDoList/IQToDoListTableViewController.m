@@ -211,6 +211,13 @@ static NSString *const identifierOfAddMode= @"addItem";
     viewController.isEditMode = editMode;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    if (editing) {
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - Initialize FetchedResultsController
 
 - (void)initializeFetchedResultsController:(NSManagedObjectContext *)managedObjectContext {
