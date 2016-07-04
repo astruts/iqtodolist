@@ -57,7 +57,8 @@ static NSInteger const countOfSecondsInOneMinute = 60;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self.textField setReturnKeyType:UIReturnKeyGo];
+    [self.textField setDelegate:self];
     self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:countOfSecondsInOneMinute];
     if (self.currentToDoItem == nil)
     {
@@ -80,6 +81,12 @@ static NSInteger const countOfSecondsInOneMinute = 60;
 
 - (IBAction)CloseKeyboardUp:(UISwipeGestureRecognizer *)sender {
     [self.textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.textField resignFirstResponder];
+    return YES;
 }
 
 @end

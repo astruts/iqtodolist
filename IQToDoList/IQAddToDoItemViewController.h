@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ToDoItemMO.h"
 
-@interface IQAddToDoItemViewController : UIViewController
+@interface IQAddToDoItemViewController : UIViewController<UITextFieldDelegate>
 
 @property (assign) BOOL isEditMode;
 @property (strong, nonatomic) ToDoItemMO *youngToDoItem;
