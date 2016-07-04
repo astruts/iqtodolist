@@ -29,9 +29,15 @@ static NSString *const keyOfIdentifierOfLocalNotification = @"notification";
 static NSString *const identifierOfEditMode= @"editItem";
 static NSString *const identifierOfAddMode= @"addItem";
 
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+                 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+                alpha:1.0]
+
 - (void)loadInitialData {
     IQToDoItem *item1 = [[IQToDoItem alloc] init];
-    item1.itemName = @"Buy milk";
+    item1.itemName = @"Buy milk  sdfghjklxdcfvghbjnkml,dfghjmk,l.;sdfghjkl";
     item1.priority = 0;
     item1.date = [NSDate dateWithTimeIntervalSinceReferenceDate:floor([[NSDate date] timeIntervalSinceReferenceDate] / 60.0) * 60.0];
     [self.toDoItems addObject:item1];
@@ -88,15 +94,23 @@ static NSString *const identifierOfAddMode= @"addItem";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
                                                             forIndexPath:indexPath];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     IQToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
     NSString * stringPriority = [IQPriorities instance].priorities[toDoItem.priority];
+    NSString * stringOfColor = [IQPriorities instance].colors[toDoItem.priority];
+    unsigned int hexValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:stringOfColor];
+    [scanner setScanLocation:0];
+    [scanner scanHexInt:&hexValue];
+    cell.backgroundColor = UIColorFromRGB(hexValue);
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterMediumStyle];
     NSString *prettyDate = [formatter stringFromDate:toDoItem.date];
     cell.detailTextLabel.text = [stringPriority stringByAppendingString:prettyDate];
-    if (toDoItem.completed) {
+        if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -203,6 +217,13 @@ static NSString *const identifierOfAddMode= @"addItem";
     viewController.indexItemInArray = numberOfItem;
     viewController.isEditMode = editMode;
     viewController.countOfArray = [self.toDoItems count];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tableView.estimatedRowHeight = 70.0; // for example. Set your average height
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.tableView reloadData];
 }
 
 @end

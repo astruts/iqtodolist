@@ -17,6 +17,7 @@ typedef enum {
 } kPriority;
 
 @property (readonly, retain) NSArray *priorities;
+@property (readonly, retain) NSArray *colors;
 
 +(instancetype) instance;
 

@@ -26,6 +26,10 @@
         _priorities = @[@"Low priority ",
                         @"Average priority ",
                         @"High priority ",];
+        
+        _colors = @[@"0xC2F7B1",
+                    @"0xF7F796",
+                    @"0xF6A3A3",];
     }
     return self;
 }
