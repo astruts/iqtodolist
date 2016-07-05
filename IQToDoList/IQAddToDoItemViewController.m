@@ -7,7 +7,7 @@
 //
 
 #import "IQAddToDoItemViewController.h"
-#import "IQAppDelegate.h"
+#import "IQCoreDataManager.h"
 
 @interface IQAddToDoItemViewController ()
 
@@ -20,7 +20,7 @@
 
 @implementation IQAddToDoItemViewController
 
-static NSInteger const countOfSecondsInOneMinute = 60;
+static NSInteger const CountOfSecondsInOneMinute = 60;
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ((sender == self.cancelButton) ||
@@ -39,7 +39,7 @@ static NSInteger const countOfSecondsInOneMinute = 60;
 }
 
 - (void)fillToDoItem {
-    NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / countOfSecondsInOneMinute) * countOfSecondsInOneMinute;
+    NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / CountOfSecondsInOneMinute) * CountOfSecondsInOneMinute;
     NSDate *pickedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
     //Can not pick earlier then current time date
     NSDate *currentDate = [NSDate date];
@@ -47,8 +47,7 @@ static NSInteger const countOfSecondsInOneMinute = 60;
         return;
     }
     
-    IQAppDelegate *appDelegate = (IQAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.youngToDoItem = [appDelegate.coreDataManager toDoItem];
+    self.youngToDoItem = [[IQCoreDataManager instance] createToDoItem];
     [self.youngToDoItem setItemName:self.textField.text];
     self.youngToDoItem.itemIsChecked = [NSNumber numberWithBool:NO];
     self.youngToDoItem.itemPriority = [NSNumber numberWithInt:self.segmentedControl.selectedSegmentIndex];
@@ -60,7 +59,7 @@ static NSInteger const countOfSecondsInOneMinute = 60;
     [self.textField setReturnKeyType:UIReturnKeyGo];
     [self.textField setDelegate:self];
     // Do any additional setup after loading the view.
-    self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:countOfSecondsInOneMinute];
+    self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:CountOfSecondsInOneMinute];
     if (self.currentToDoItem == nil)
     {
         return;

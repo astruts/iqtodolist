@@ -10,10 +10,21 @@
 
 @implementation IQCoreDataManager
 
+static NSString *const EntityToDoItem= @"ToDoItem";
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize toDoItem = _toDoItem;
+@synthesize createToDoItem = _createToDoItem;
+
++ (instancetype)instance {
+    static IQCoreDataManager *instance = nil;
+    @synchronized(self) {
+        if (instance == nil)
+            instance = [[self alloc] init];
+    }
+    return instance;
+}
 
 - (void)saveContext {
     NSError *error = nil;
@@ -26,10 +37,10 @@
     }
 }
 
-- (ToDoItemMO *)toDoItem {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ToDoItem" inManagedObjectContext:_managedObjectContext];
-    _toDoItem = [[ToDoItemMO alloc] initWithEntity:entity insertIntoManagedObjectContext:_managedObjectContext];
-    return _toDoItem;
+- (ToDoItemMO *)createToDoItem {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:EntityToDoItem inManagedObjectContext:[self managedObjectContext]];
+    _createToDoItem = [[ToDoItemMO alloc] initWithEntity:entity insertIntoManagedObjectContext:[self managedObjectContext]];
+    return _createToDoItem;
 }
 
 #pragma mark - Core Data stack

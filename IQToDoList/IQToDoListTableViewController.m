@@ -10,7 +10,7 @@
 #import "IQAddToDoItemViewController.h"
 #import "IQPriorities.h"
 #import "ToDoItemMO.h"
-#import "IQAppDelegate.h"
+#import "IQCoreDataManager.h"
 #import "IQToDoItemDomain.h"
 
 @interface IQToDoListTableViewController ()
@@ -23,20 +23,19 @@
 
 @implementation IQToDoListTableViewController
 
-static NSString *const cellIdentifier = @"ListPrototypeCell";
+static NSString *const CellIdentifier = @"ListPrototypeCell";
 
-static NSString *const titleOfEditMode = @"Add To-Do Item";
-static NSString *const titleOfAddMode = @"Edit To-Do Item";
+static NSString *const TitleOfEditMode = @"Add To-Do Item";
+static NSString *const TitleOfAddMode = @"Edit To-Do Item";
 
-static NSString *const lowPriority = @"Low priority ";
-static NSString *const middlePriority = @"Middle priority ";
-static NSString *const highPriority = @"High priority ";
+static NSString *const NotificationAlertAction = @"Show me the item";
+static NSString *const KeyOfIdentifierOfLocalNotification = @"objectID";
 
-static NSString *const notificationAlertAction = @"Show me the item";
-static NSString *const keyOfIdentifierOfLocalNotification = @"objectID";
+static NSString *const IdentifierOfEditMode= @"editItem";
+static NSString *const IdentifierOfAddMode= @"addItem";
 
-static NSString *const identifierOfEditMode= @"editItem";
-static NSString *const identifierOfAddMode= @"addItem";
+static NSString *const EntityToDoItem= @"ToDoItem";
+static NSString *const AtributeItemName= @"itemName";
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue {
     IQAddToDoItemViewController *source = [segue sourceViewController];
@@ -45,10 +44,10 @@ static NSString *const identifierOfAddMode= @"addItem";
     }
     if (source.isEditMode) {
         [self deleteLocalNotification:source.currentToDoItem];
-        [self.toDoItemDomain updateToDoItem:source.currentToDoItem :source.youngToDoItem];
+        [self.toDoItemDomain deleteToDoItem:source.currentToDoItem];
         [self addLocalNotification:source.youngToDoItem];
     } else {
-        [self.toDoItemDomain createToDoItem:source.youngToDoItem];
+        [self.toDoItemDomain saveCreatedToDoItem:source.youngToDoItem];
         [self addLocalNotification:source.youngToDoItem];
     }
 }
@@ -57,7 +56,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = toDoItem.itemDate;
     localNotification.alertBody = toDoItem.itemName;
-    localNotification.alertAction = notificationAlertAction;
+    localNotification.alertAction = NotificationAlertAction;
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     localNotification.soundName = UILocalNotificationDefaultSoundName;
@@ -65,7 +64,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     NSManagedObjectID *managgedObjectId = toDoItem.objectID;
     NSString *stringID = [managgedObjectId.URIRepresentation absoluteString];
     NSDictionary *infoDict = [NSDictionary dictionaryWithObject:stringID
-                                                         forKey:keyOfIdentifierOfLocalNotification];
+                                                         forKey:KeyOfIdentifierOfLocalNotification];
     localNotification.userInfo = infoDict;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
@@ -76,7 +75,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     NSArray *scheduledNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
     for (UILocalNotification *notification in scheduledNotifications) {
         //Get the ID you set when creating the notification
-        NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:keyOfIdentifierOfLocalNotification];
+        NSString *stringIdentifierOfLocalNotification = [notification.userInfo objectForKey:KeyOfIdentifierOfLocalNotification];
         if ([stringIdentifierOfLocalNotification isEqualToString:stringID]) {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
             break;
@@ -86,11 +85,10 @@ static NSString *const identifierOfAddMode= @"addItem";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    IQAppDelegate *appDelegate = (IQAppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.managedObjectContext = [[appDelegate coreDataManager] managedObjectContext];
+    self.managedObjectContext = [[IQCoreDataManager instance] managedObjectContext];
     [self initializeFetchedResultsController:self.managedObjectContext];
-    self.toDoItemDomain = [IQToDoItemDomain new];
-    [self.toDoItemDomain initializeIQToDoItemDomain:self.managedObjectContext];
+    self.toDoItemDomain = [[IQToDoItemDomain alloc] initWithManagedObjectContext:self.managedObjectContext];
+    //[self.toDoItemDomain init:self.managedObjectContext];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
@@ -123,7 +121,7 @@ static NSString *const identifierOfAddMode= @"addItem";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Set up the cell
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -154,7 +152,7 @@ static NSString *const identifierOfAddMode= @"addItem";
 #pragma mark - Navigation
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    if ([identifier isEqualToString:identifierOfEditMode] && !self.tableView.editing) {
+    if ([identifier isEqualToString:IdentifierOfEditMode] && !self.tableView.editing) {
         return NO;
     }
     return YES;
@@ -165,17 +163,17 @@ static NSString *const identifierOfAddMode= @"addItem";
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    if ([segue.identifier isEqualToString:identifierOfAddMode]) {
+    if ([segue.identifier isEqualToString:IdentifierOfAddMode]) {
         [self prepareViewControllerForSegue:segue
                                    withItem:nil
-                                  withTitle:titleOfEditMode
+                                  withTitle:TitleOfEditMode
                                  isEditMode:NO];
     }
-    if ([segue.identifier isEqualToString:identifierOfEditMode] && self.tableView.editing) {
+    if ([segue.identifier isEqualToString:IdentifierOfEditMode] && self.tableView.editing) {
         ToDoItemMO *toDoItemForEditing = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self prepareViewControllerForSegue:segue
                                    withItem:toDoItemForEditing
-                                  withTitle:titleOfAddMode
+                                  withTitle:TitleOfAddMode
                                  isEditMode:YES];
     }
 }
@@ -231,8 +229,8 @@ static NSString *const identifierOfAddMode= @"addItem";
 #pragma mark - Initialize FetchedResultsController
 
 - (void)initializeFetchedResultsController:(NSManagedObjectContext *)managedObjectContext {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ToDoItem"];
-    NSSortDescriptor *itemNameSort = [NSSortDescriptor sortDescriptorWithKey:@"itemName" ascending:YES];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:EntityToDoItem];
+    NSSortDescriptor *itemNameSort = [NSSortDescriptor sortDescriptorWithKey:AtributeItemName ascending:YES];
     [request setSortDescriptors:@[itemNameSort]];
     NSFetchedResultsController *fetchRequestController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                                              managedObjectContext:managedObjectContext
