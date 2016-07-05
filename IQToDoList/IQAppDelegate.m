@@ -7,20 +7,21 @@
 //
 
 #import "IQAppDelegate.h"
+#import "IQCoreDataManager.h"
 
 @implementation IQAppDelegate
 
-static NSString *const notificationAlertTitle = @"Reminder";
-static NSString *const notificationAlertCancelButtonTitle = @"OK";
+static NSString *const NotificationAlertTitle = @"Reminder";
+static NSString *const NotificationAlertCancelButtonTitle = @"OK";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self setCoreDataManager:[IQCoreDataManager new]];
+    [IQCoreDataManager instance];
     
     [self registerNotificationsIfNeeded];
     
     [self preloadKeyboard];
     
-    [self retreiveStoredNotifications:launchOptions application:application];
+    [self retreiveStoredNotifications:launchOptions];
     
     return YES;
 }
@@ -46,15 +47,15 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Saves changes in the application's managed object context before the application terminates.
-    [[self coreDataManager] saveContext];
+    [[IQCoreDataManager instance] saveContext];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:notificationAlertTitle
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NotificationAlertTitle
                                                         message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:notificationAlertCancelButtonTitle
+                                                       delegate:self cancelButtonTitle:NotificationAlertCancelButtonTitle
                                               otherButtonTitles:nil];
         [alert show];
         application.applicationIconBadgeNumber--;
@@ -72,12 +73,12 @@ static NSString *const notificationAlertCancelButtonTitle = @"OK";
     [lagFreeField removeFromSuperview];
 }
 
-- (void)retreiveStoredNotifications:(NSDictionary *)launchOptions application:(UIApplication *)application {
+- (void)retreiveStoredNotifications:(NSDictionary *)launchOptions {
     //  Handle launching from a notification
     UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotification) {
         // Set icon badge number to zero
-        [self application:application didReceiveLocalNotification:localNotification];
+        [self application:[UIApplication sharedApplication] didReceiveLocalNotification:localNotification];
         //application.applicationIconBadgeNumber = 0;
     }
 }

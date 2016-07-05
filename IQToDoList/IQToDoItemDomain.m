@@ -16,18 +16,14 @@
 
 @implementation IQToDoItemDomain
 
-- (void)initializeIQToDoItemDomain:(NSManagedObjectContext *)managedObjectContext {
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    self = [super init];
     [self setManagedObjectContext:managedObjectContext];
+    return self;
 }
 
-- (void) createToDoItem:(ToDoItemMO *)youngToDoItem {
-    [self.managedObjectContext insertObject:youngToDoItem];
+- (void) saveCreatedToDoItem:(ToDoItemMO *)youngToDoItem {
     [self.managedObjectContext save:nil];
-}
-
-- (void) updateToDoItem:(ToDoItemMO *)currentToDoItem :(ToDoItemMO *)youngToDoItem {
-    [self.managedObjectContext deleteObject:currentToDoItem];
-    [[self managedObjectContext] save:nil];
 }
 
 - (void) deleteToDoItem:(ToDoItemMO *)currentToDoItem {

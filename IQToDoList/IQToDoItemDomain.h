@@ -12,9 +12,8 @@
 
 @interface IQToDoItemDomain : NSObject
 
-- (void)initializeIQToDoItemDomain:(NSManagedObjectContext *)managedObjectContext;
-- (void) createToDoItem:(ToDoItemMO *)youngToDoItem;
-- (void) updateToDoItem:(ToDoItemMO *)currentToDoItem :(ToDoItemMO *)youngToDoItem;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+- (void) saveCreatedToDoItem:(ToDoItemMO *)youngToDoItem;
 - (void) deleteToDoItem:(ToDoItemMO *)currentToDoItem;
 
 @end
