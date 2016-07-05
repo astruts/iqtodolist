@@ -38,15 +38,22 @@ static NSInteger const CountOfSecondsInOneMinute = 60;
     }
 }
 
+- (NSDate *)isEarlierThenCurrentDate:(NSTimeInterval)time{
+    //Can not pick earlier then current time date
+    NSDate *pickedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+    if ([[NSDate date] timeIntervalSinceReferenceDate] > time) {
+        return nil;
+    } else {
+        return pickedDate;
+    }
+}
+
 - (void)fillToDoItem {
     NSTimeInterval time = floor([self.datePicker.date timeIntervalSinceReferenceDate] / CountOfSecondsInOneMinute) * CountOfSecondsInOneMinute;
-    NSDate *pickedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
-    //Can not pick earlier then current time date
-    NSDate *currentDate = [NSDate date];
-    if ([[pickedDate earlierDate:currentDate] isEqualToDate:pickedDate]) {
+    NSDate *pickedDate = [self isEarlierThenCurrentDate:time];
+    if (pickedDate == nil) {
         return;
     }
-    
     self.youngToDoItem = [[IQCoreDataManager instance] createToDoItem];
     [self.youngToDoItem setItemName:self.textField.text];
     self.youngToDoItem.itemIsChecked = [NSNumber numberWithBool:NO];

@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "IQAddToDoItemViewController.h"
 
 @interface IQToDoListTests : XCTestCase
 
@@ -14,9 +15,14 @@
 
 @implementation IQToDoListTests
 
+IQAddToDoItemViewController *addToDoItemViewController;
+NSTimeInterval timeInterval;
+NSDate *returnedDate;
+
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    addToDoItemViewController = [[IQAddToDoItemViewController alloc] init];
 }
 
 - (void)tearDown {
@@ -36,11 +42,29 @@
     }];
 }
 
-- (void)testAlwaysFailed {
-    /*
-     аргумент1 - текст ошибки
-     */
-    XCTFail(@"always failed");
+- (void)testIsNilWhenTimeIntervalIsEqualCurrentDate{
+    timeInterval = [[NSDate date] timeIntervalSinceReferenceDate];
+    returnedDate = [addToDoItemViewController isEarlierThenCurrentDate:timeInterval];
+    XCTAssertNil(returnedDate, @"pointer:%p", returnedDate);
+}
+
+- (void)testIsNotNilWhenTimeIntervalBiggerThenCurrentDate{
+    timeInterval = [[NSDate date] timeIntervalSinceReferenceDate] + 1;
+    returnedDate = [addToDoItemViewController isEarlierThenCurrentDate:timeInterval];
+    XCTAssertNotNil(returnedDate);
+}
+
+- (void)testIsNotNilWhenTimeIntervalLessThenCurrentDate{
+    timeInterval = [[NSDate date] timeIntervalSinceReferenceDate] - 1;
+    returnedDate = [addToDoItemViewController isEarlierThenCurrentDate:timeInterval];
+    XCTAssertNil(returnedDate, @"pointer:%p", returnedDate);
+}
+
+- (void)testIsEqualReturnedDateCalculatedWhenTimeIntervalBiggerThenCurrentDate {
+    timeInterval = [[NSDate date] timeIntervalSinceReferenceDate] + 1;
+    returnedDate = [addToDoItemViewController isEarlierThenCurrentDate:timeInterval];
+    NSDate *calculatedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:timeInterval];
+    XCTAssertEqualObjects(returnedDate, calculatedDate, @"obj1(%@) not equal to obj2(%@))", returnedDate, calculatedDate);
 }
 
 @end

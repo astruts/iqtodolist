@@ -18,4 +18,6 @@
 - (IBAction)CloseKeyboard:(UISwipeGestureRecognizer *)sender;
 - (IBAction)CloseKeyboardUp:(UISwipeGestureRecognizer *)sender;
 
+- (NSDate *)isEarlierThenCurrentDate:(NSTimeInterval)time;
+
 @end
