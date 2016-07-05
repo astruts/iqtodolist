@@ -60,6 +60,7 @@ static NSString *const identifierOfAddMode= @"addItem";
     localNotification.alertAction = notificationAlertAction;
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
     
     NSManagedObjectID *managgedObjectId = toDoItem.objectID;
     NSString *stringID = [managgedObjectId.URIRepresentation absoluteString];
