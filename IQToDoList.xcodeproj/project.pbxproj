@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65998D7F1D2BDE38007EF67D /* IQToDoListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65998D7E1D2BDE38007EF67D /* IQToDoListTests.m */; };
 		65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */; };
 		65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */; };
 		65EBC9F21D1BD845005821E3 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EBC9F11D1BD845005821E3 /* Images-2.xcassets */; };
@@ -28,7 +29,20 @@
 		84E718D71D1AB33400394933 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E718D61D1AB33400394933 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		65998D811D2BDE38007EF67D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84E718A91D1AB25A00394933 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84E718B01D1AB25A00394933;
+			remoteInfo = IQToDoList;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		65998D7C1D2BDE37007EF67D /* IQToDoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IQToDoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65998D7E1D2BDE38007EF67D /* IQToDoListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IQToDoListTests.m; sourceTree = "<group>"; };
+		65998D801D2BDE38007EF67D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65E730E31D1AC73E0003D515 /* IQAddToDoItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQAddToDoItemViewController.h; sourceTree = "<group>"; };
 		65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQAddToDoItemViewController.m; sourceTree = "<group>"; };
 		65E730E61D1AC8E80003D515 /* IQToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoListTableViewController.h; sourceTree = "<group>"; };
@@ -61,6 +75,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		65998D791D2BDE37007EF67D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84E718AE1D1AB25A00394933 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,10 +110,20 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		65998D7D1D2BDE38007EF67D /* IQToDoListTests */ = {
+			isa = PBXGroup;
+			children = (
+				65998D7E1D2BDE38007EF67D /* IQToDoListTests.m */,
+				65998D801D2BDE38007EF67D /* Info.plist */,
+			);
+			path = IQToDoListTests;
+			sourceTree = "<group>";
+		};
 		84E718A81D1AB25A00394933 = {
 			isa = PBXGroup;
 			children = (
 				84E718BC1D1AB25A00394933 /* IQToDoList */,
+				65998D7D1D2BDE38007EF67D /* IQToDoListTests */,
 				84E718B31D1AB25A00394933 /* Frameworks */,
 				84E718B21D1AB25A00394933 /* Products */,
 			);
@@ -102,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				84E718B11D1AB25A00394933 /* IQToDoList.app */,
+				65998D7C1D2BDE37007EF67D /* IQToDoListTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +185,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		65998D7B1D2BDE37007EF67D /* IQToDoListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65998D831D2BDE38007EF67D /* Build configuration list for PBXNativeTarget "IQToDoListTests" */;
+			buildPhases = (
+				65998D781D2BDE37007EF67D /* Sources */,
+				65998D791D2BDE37007EF67D /* Frameworks */,
+				65998D7A1D2BDE37007EF67D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65998D821D2BDE38007EF67D /* PBXTargetDependency */,
+			);
+			name = IQToDoListTests;
+			productName = IQToDoListTests;
+			productReference = 65998D7C1D2BDE37007EF67D /* IQToDoListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		84E718B01D1AB25A00394933 /* IQToDoList */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84E718D31D1AB25A00394933 /* Build configuration list for PBXNativeTarget "IQToDoList" */;
@@ -180,6 +230,10 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Admin;
 				TargetAttributes = {
+					65998D7B1D2BDE37007EF67D = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 84E718B01D1AB25A00394933;
+					};
 					84E718B01D1AB25A00394933 = {
 						DevelopmentTeam = D4DBL8B73M;
 					};
@@ -198,11 +252,19 @@
 			projectRoot = "";
 			targets = (
 				84E718B01D1AB25A00394933 /* IQToDoList */,
+				65998D7B1D2BDE37007EF67D /* IQToDoListTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		65998D7A1D2BDE37007EF67D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84E718AF1D1AB25A00394933 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -219,6 +281,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		65998D781D2BDE37007EF67D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65998D7F1D2BDE38007EF67D /* IQToDoListTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84E718AD1D1AB25A00394933 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,6 +307,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		65998D821D2BDE38007EF67D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84E718B01D1AB25A00394933 /* IQToDoList */;
+			targetProxy = 65998D811D2BDE38007EF67D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		84E718BF1D1AB25A00394933 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -249,6 +327,65 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		65998D841D2BDE38007EF67D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = IQToDoListTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.IQToDoListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IQToDoList.app/IQToDoList";
+			};
+			name = Debug;
+		};
+		65998D851D2BDE38007EF67D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = IQToDoListTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.IQToDoListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IQToDoList.app/IQToDoList";
+			};
+			name = Release;
+		};
 		84E718D11D1AB25A00394933 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -338,6 +475,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65998D831D2BDE38007EF67D /* Build configuration list for PBXNativeTarget "IQToDoListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65998D841D2BDE38007EF67D /* Debug */,
+				65998D851D2BDE38007EF67D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		84E718AC1D1AB25A00394933 /* Build configuration list for PBXProject "IQToDoList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -357,6 +502,7 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
 /* Begin XCVersionGroup section */
 		8491F2AF1D26727900AA3B6D /* IQToDoList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
