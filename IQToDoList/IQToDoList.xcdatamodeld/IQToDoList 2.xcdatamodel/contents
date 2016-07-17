@@ -5,8 +5,9 @@
         <attribute name="itemIsChecked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemPriority" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="itemText" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ToDoItem" positionX="-54" positionY="-18" width="128" height="105"/>
+        <element name="ToDoItem" positionX="-54" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

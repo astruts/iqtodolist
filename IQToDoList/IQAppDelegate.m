@@ -53,11 +53,27 @@ static NSString *const NotificationAlertCancelButtonTitle = @"OK";
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     UIApplicationState state = [application applicationState];
     if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NotificationAlertTitle
-                                                        message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:NotificationAlertCancelButtonTitle
-                                              otherButtonTitles:nil];
-        [alert show];
+        UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        
+        void (^presentLoginNavigationController)() = ^{
+            UIAlertController *alertController= [UIAlertController
+                                                 alertControllerWithTitle:NotificationAlertTitle
+                                                 message:notification.alertBody
+                                                 preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction  actionWithTitle:NotificationAlertCancelButtonTitle
+                                                                style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:okAction];
+            [rootViewController presentViewController:alertController animated:YES completion:nil];
+        };
+        
+        if (rootViewController.presentedViewController) {
+            [rootViewController dismissViewControllerAnimated:NO completion:^{
+                presentLoginNavigationController();
+            }];
+        } else {
+            presentLoginNavigationController();
+        }
+        
         --application.applicationIconBadgeNumber;
     }
 }

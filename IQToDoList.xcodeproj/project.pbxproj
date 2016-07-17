@@ -11,6 +11,9 @@
 		65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */; };
 		65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */; };
 		65EBC9F21D1BD845005821E3 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EBC9F11D1BD845005821E3 /* Images-2.xcassets */; };
+		7FF62E441D3BD108001862CF /* IQMigrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FF62E431D3BD108001862CF /* IQMigrationTest.m */; };
+		7FF62E461D3BD7C0001862CF /* IQToDoList.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7FF62E451D3BD7C0001862CF /* IQToDoList.sqlite */; };
+		7FF62E571D3BDE85001862CF /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2AF1D26727900AA3B6D /* IQToDoList.xcdatamodeld */; };
 		8491F2B11D26727900AA3B6D /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2AF1D26727900AA3B6D /* IQToDoList.xcdatamodeld */; };
 		8491F2B41D26757700AA3B6D /* ToDoItemMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2B31D26757700AA3B6D /* ToDoItemMO.m */; };
 		8491F2B71D269F2500AA3B6D /* IQCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F2B61D269F2500AA3B6D /* IQCoreDataManager.m */; };
@@ -48,6 +51,9 @@
 		65E730E61D1AC8E80003D515 /* IQToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoListTableViewController.h; sourceTree = "<group>"; };
 		65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoListTableViewController.m; sourceTree = "<group>"; };
 		65EBC9F11D1BD845005821E3 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		7FF62E421D3BD0A4001862CF /* IQToDoList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IQToDoList 2.xcdatamodel"; sourceTree = "<group>"; };
+		7FF62E431D3BD108001862CF /* IQMigrationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQMigrationTest.m; sourceTree = "<group>"; };
+		7FF62E451D3BD7C0001862CF /* IQToDoList.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = IQToDoList.sqlite; sourceTree = "<group>"; };
 		8491F2B01D26727900AA3B6D /* IQToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IQToDoList.xcdatamodel; sourceTree = "<group>"; };
 		8491F2B21D26757700AA3B6D /* ToDoItemMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoItemMO.h; sourceTree = "<group>"; };
 		8491F2B31D26757700AA3B6D /* ToDoItemMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoItemMO.m; sourceTree = "<group>"; };
@@ -113,8 +119,10 @@
 		65998D7D1D2BDE38007EF67D /* IQToDoListTests */ = {
 			isa = PBXGroup;
 			children = (
+				7FF62E451D3BD7C0001862CF /* IQToDoList.sqlite */,
 				65998D7E1D2BDE38007EF67D /* IQToDoListTests.m */,
 				65998D801D2BDE38007EF67D /* Info.plist */,
+				7FF62E431D3BD108001862CF /* IQMigrationTest.m */,
 			);
 			path = IQToDoListTests;
 			sourceTree = "<group>";
@@ -227,7 +235,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IQ;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Admin;
 				TargetAttributes = {
 					65998D7B1D2BDE37007EF67D = {
@@ -235,7 +243,7 @@
 						TestTargetID = 84E718B01D1AB25A00394933;
 					};
 					84E718B01D1AB25A00394933 = {
-						DevelopmentTeam = D4DBL8B73M;
+						DevelopmentTeam = NBR2A98SFK;
 					};
 				};
 			};
@@ -262,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF62E461D3BD7C0001862CF /* IQToDoList.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +294,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF62E441D3BD108001862CF /* IQMigrationTest.m in Sources */,
 				65998D7F1D2BDE38007EF67D /* IQToDoListTests.m in Sources */,
+				7FF62E571D3BDE85001862CF /* IQToDoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +411,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -453,6 +465,7 @@
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
 				INFOPLIST_FILE = "IQToDoList/IQToDoList-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.practice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -470,6 +483,7 @@
 				GCC_PREFIX_HEADER = "IQToDoList/IQToDoList-Prefix.pch";
 				INFOPLIST_FILE = "IQToDoList/IQToDoList-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.practice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -512,9 +526,10 @@
 		8491F2AF1D26727900AA3B6D /* IQToDoList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				7FF62E421D3BD0A4001862CF /* IQToDoList 2.xcdatamodel */,
 				8491F2B01D26727900AA3B6D /* IQToDoList.xcdatamodel */,
 			);
-			currentVersion = 8491F2B01D26727900AA3B6D /* IQToDoList.xcdatamodel */;
+			currentVersion = 7FF62E421D3BD0A4001862CF /* IQToDoList 2.xcdatamodel */;
 			path = IQToDoList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
