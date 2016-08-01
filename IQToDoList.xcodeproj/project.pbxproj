@@ -94,7 +94,7 @@
 		84B441F51D24017400B41CBA /* IQPriorities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQPriorities.m; sourceTree = "<group>"; };
 		84BD38701D27C5F300462805 /* IQToDoItemDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoItemDomain.h; sourceTree = "<group>"; };
 		84BD38711D27C5F300462805 /* IQToDoItemDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoItemDomain.m; sourceTree = "<group>"; };
-		84E718B11D1AB25A00394933 /* IQToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IQToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E718B11D1AB25A00394933 /* IQToDoListSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IQToDoListSource.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E718B41D1AB25A00394933 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		84E718B61D1AB25A00394933 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84E718B81D1AB25A00394933 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,7 +191,7 @@
 		84E718B21D1AB25A00394933 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84E718B11D1AB25A00394933 /* IQToDoList.app */,
+				84E718B11D1AB25A00394933 /* IQToDoListSource.app */,
 				65998D7C1D2BDE37007EF67D /* IQToDoListTests.xctest */,
 				7F550EA31D4F2B4500773493 /* SharingExtension.appex */,
 			);
@@ -281,9 +281,9 @@
 			productReference = 7F550EA31D4F2B4500773493 /* SharingExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		84E718B01D1AB25A00394933 /* IQToDoList */ = {
+		84E718B01D1AB25A00394933 /* IQToDoListSource */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E718D31D1AB25A00394933 /* Build configuration list for PBXNativeTarget "IQToDoList" */;
+			buildConfigurationList = 84E718D31D1AB25A00394933 /* Build configuration list for PBXNativeTarget "IQToDoListSource" */;
 			buildPhases = (
 				84E718AD1D1AB25A00394933 /* Sources */,
 				84E718AE1D1AB25A00394933 /* Frameworks */,
@@ -295,9 +295,9 @@
 			dependencies = (
 				7F550EAD1D4F2B4500773493 /* PBXTargetDependency */,
 			);
-			name = IQToDoList;
+			name = IQToDoListSource;
 			productName = IQToDoList;
-			productReference = 84E718B11D1AB25A00394933 /* IQToDoList.app */;
+			productReference = 84E718B11D1AB25A00394933 /* IQToDoListSource.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -346,7 +346,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84E718B01D1AB25A00394933 /* IQToDoList */,
+				84E718B01D1AB25A00394933 /* IQToDoListSource */,
 				65998D7B1D2BDE37007EF67D /* IQToDoListTests */,
 				7F550EA21D4F2B4500773493 /* SharingExtension */,
 			);
@@ -425,7 +425,7 @@
 /* Begin PBXTargetDependency section */
 		65998D821D2BDE38007EF67D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84E718B01D1AB25A00394933 /* IQToDoList */;
+			target = 84E718B01D1AB25A00394933 /* IQToDoListSource */;
 			targetProxy = 65998D811D2BDE38007EF67D /* PBXContainerItemProxy */;
 		};
 		7F550EAD1D4F2B4500773493 /* PBXTargetDependency */ = {
@@ -540,7 +540,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.IQToDoList.SharingExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3135eb58-6a1e-4b8b-945a-36d2366343b4";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -649,7 +649,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.IQToDoList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0863b088-713e-4cf8-aa13-f7ef8c9d4352";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -703,7 +703,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E718D31D1AB25A00394933 /* Build configuration list for PBXNativeTarget "IQToDoList" */ = {
+		84E718D31D1AB25A00394933 /* Build configuration list for PBXNativeTarget "IQToDoListSource" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84E718D41D1AB25A00394933 /* Debug */,
