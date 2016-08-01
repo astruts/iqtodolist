@@ -80,6 +80,8 @@
 		7F550EA61D4F2B4500773493 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		7F550EA91D4F2B4500773493 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		7F550EAB1D4F2B4500773493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F8BFE611D4F732A009661A8 /* IQToDoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = IQToDoList.entitlements; sourceTree = "<group>"; };
+		7F8BFE621D4F7357009661A8 /* SharingExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SharingExtension.entitlements; sourceTree = "<group>"; };
 		7FF62E421D3BD0A4001862CF /* IQToDoList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IQToDoList 2.xcdatamodel"; sourceTree = "<group>"; };
 		7FF62E431D3BD108001862CF /* IQMigrationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQMigrationTest.m; sourceTree = "<group>"; };
 		7FF62E451D3BD7C0001862CF /* IQToDoList.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = IQToDoList.sqlite; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		7F550EA41D4F2B4500773493 /* SharingExtension */ = {
 			isa = PBXGroup;
 			children = (
+				7F8BFE621D4F7357009661A8 /* SharingExtension.entitlements */,
 				7F550EA51D4F2B4500773493 /* ShareViewController.h */,
 				7F550EA61D4F2B4500773493 /* ShareViewController.m */,
 				7F550EA81D4F2B4500773493 /* MainInterface.storyboard */,
@@ -209,6 +212,7 @@
 		84E718BC1D1AB25A00394933 /* IQToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				7F8BFE611D4F732A009661A8 /* IQToDoList.entitlements */,
 				84E718C51D1AB25A00394933 /* IQAppDelegate.h */,
 				84E718C61D1AB25A00394933 /* IQAppDelegate.m */,
 				84B441F41D24017400B41CBA /* IQPriorities.h */,
@@ -313,9 +317,19 @@
 					7F550EA21D4F2B4500773493 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = CMW63LS64J;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					84E718B01D1AB25A00394933 = {
 						DevelopmentTeam = CMW63LS64J;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -509,6 +523,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = SharingExtension/SharingExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -525,7 +540,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.IQToDoList.SharingExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "070c3157-8828-4779-986f-6d20464a651e";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -539,6 +554,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = SharingExtension/SharingExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -557,6 +573,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.IQToDoList.SharingExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -623,6 +640,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = IQToDoList/IQToDoList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -631,7 +649,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.IQToDoList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fcb59cac-b197-4e01-9768-57fb98ab0fbe";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -641,6 +659,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = IQToDoList/IQToDoList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
