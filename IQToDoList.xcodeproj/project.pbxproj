@@ -11,10 +11,10 @@
 		65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E41D1AC73E0003D515 /* IQAddToDoItemViewController.m */; };
 		65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */; };
 		65EBC9F21D1BD845005821E3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65EBC9F11D1BD845005821E3 /* Images.xcassets */; };
-		7F33B3781D5089F200F0932C /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F33B3751D5089F200F0932C /* IQToDoList.xcdatamodeld */; };
 		7F33B37C1D508A7800F0932C /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F33B3791D508A7800F0932C /* IQToDoList.xcdatamodeld */; };
 		7F4D3BD91D508ECE006DEA5A /* IQToDoListFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5FFDD41D4F7EE1002CADF5 /* IQToDoListFramework.framework */; };
-		7F4D3BDD1D50A2B6006DEA5A /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F4D3BDA1D50A2B6006DEA5A /* IQToDoList.xcdatamodeld */; };
+		7F4D3BE11D50C1A6006DEA5A /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F33B3791D508A7800F0932C /* IQToDoList.xcdatamodeld */; };
+		7F4D3BE21D50C1A6006DEA5A /* IQToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7F33B3791D508A7800F0932C /* IQToDoList.xcdatamodeld */; };
 		7F550EA71D4F2B4500773493 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F550EA61D4F2B4500773493 /* ShareViewController.m */; };
 		7F550EAA1D4F2B4500773493 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F550EA81D4F2B4500773493 /* MainInterface.storyboard */; };
 		7F550EAE1D4F2B4500773493 /* SharingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7F550EA31D4F2B4500773493 /* SharingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -119,12 +119,8 @@
 		65E730E61D1AC8E80003D515 /* IQToDoListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToDoListTableViewController.h; sourceTree = "<group>"; };
 		65E730E71D1AC8E80003D515 /* IQToDoListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToDoListTableViewController.m; sourceTree = "<group>"; };
 		65EBC9F11D1BD845005821E3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7F33B3761D5089F200F0932C /* IQToDoList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IQToDoList 2.xcdatamodel"; sourceTree = "<group>"; };
-		7F33B3771D5089F200F0932C /* IQToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IQToDoList.xcdatamodel; sourceTree = "<group>"; };
 		7F33B37A1D508A7800F0932C /* IQToDoList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IQToDoList 2.xcdatamodel"; sourceTree = "<group>"; };
 		7F33B37B1D508A7800F0932C /* IQToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IQToDoList.xcdatamodel; sourceTree = "<group>"; };
-		7F4D3BDB1D50A2B6006DEA5A /* IQToDoList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "IQToDoList 2.xcdatamodel"; sourceTree = "<group>"; };
-		7F4D3BDC1D50A2B6006DEA5A /* IQToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IQToDoList.xcdatamodel; sourceTree = "<group>"; };
 		7F550EA31D4F2B4500773493 /* SharingExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SharingExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F550EA51D4F2B4500773493 /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		7F550EA61D4F2B4500773493 /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -227,7 +223,6 @@
 		7F550EA41D4F2B4500773493 /* SharingExtension */ = {
 			isa = PBXGroup;
 			children = (
-				7F4D3BDA1D50A2B6006DEA5A /* IQToDoList.xcdatamodeld */,
 				7F8BFE621D4F7357009661A8 /* SharingExtension.entitlements */,
 				7F550EA51D4F2B4500773493 /* ShareViewController.h */,
 				7F550EA61D4F2B4500773493 /* ShareViewController.m */,
@@ -301,7 +296,6 @@
 		84E718BC1D1AB25A00394933 /* IQToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				7F33B3751D5089F200F0932C /* IQToDoList.xcdatamodeld */,
 				7F8BFE611D4F732A009661A8 /* IQToDoList.entitlements */,
 				84E718C51D1AB25A00394933 /* IQAppDelegate.h */,
 				84E718C61D1AB25A00394933 /* IQAppDelegate.m */,
@@ -566,7 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F550EA71D4F2B4500773493 /* ShareViewController.m in Sources */,
-				7F4D3BDD1D50A2B6006DEA5A /* IQToDoList.xcdatamodeld in Sources */,
+				7F4D3BE21D50C1A6006DEA5A /* IQToDoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +592,7 @@
 				65E730E51D1AC73E0003D515 /* IQAddToDoItemViewController.m in Sources */,
 				65E730E81D1AC8E80003D515 /* IQToDoListTableViewController.m in Sources */,
 				84B441F61D24017400B41CBA /* IQPriorities.m in Sources */,
-				7F33B3781D5089F200F0932C /* IQToDoList.xcdatamodeld in Sources */,
+				7F4D3BE11D50C1A6006DEA5A /* IQToDoList.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,17 +1061,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7F33B3751D5089F200F0932C /* IQToDoList.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7F33B3761D5089F200F0932C /* IQToDoList 2.xcdatamodel */,
-				7F33B3771D5089F200F0932C /* IQToDoList.xcdatamodel */,
-			);
-			currentVersion = 7F33B3761D5089F200F0932C /* IQToDoList 2.xcdatamodel */;
-			path = IQToDoList.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		7F33B3791D508A7800F0932C /* IQToDoList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
@@ -1085,17 +1068,6 @@
 				7F33B37B1D508A7800F0932C /* IQToDoList.xcdatamodel */,
 			);
 			currentVersion = 7F33B37A1D508A7800F0932C /* IQToDoList 2.xcdatamodel */;
-			path = IQToDoList.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		7F4D3BDA1D50A2B6006DEA5A /* IQToDoList.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7F4D3BDB1D50A2B6006DEA5A /* IQToDoList 2.xcdatamodel */,
-				7F4D3BDC1D50A2B6006DEA5A /* IQToDoList.xcdatamodel */,
-			);
-			currentVersion = 7F4D3BDB1D50A2B6006DEA5A /* IQToDoList 2.xcdatamodel */;
 			path = IQToDoList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
